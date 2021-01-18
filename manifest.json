@@ -1,0 +1,38 @@
+{
+  "name": "Rouvy beautifier",
+  "version": "1.0",
+  "description": "Make Rouvy web great again!",
+  "manifest_version": 2,
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://my.rouvy.com/onlinerace"
+      ],
+      "js": [
+        "jquery.js",
+        "filter_races.js"
+      ],
+      "run_at": "document_end"
+    }],
+  "page_action": {
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "default_icon": {
+    "16": "images/rouvy.png",
+    "32": "images/rouvy.png",
+    "48": "images/rouvy.png",
+    "128": "images/rouvy.png"
+  },
+  "icons": {
+    "16": "images/rouvy.png",
+    "32": "images/rouvy.png",
+    "48": "images/rouvy.png",
+    "128": "images/rouvy.png"
+  },
+  "permissions": ["declarativeContent","activeTab"]
+}
