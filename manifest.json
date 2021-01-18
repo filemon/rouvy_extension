@@ -21,7 +21,7 @@
   "page_action": {
     "default_popup": "popup.html"
   },
-  "options_page": "options.html",
+  
   "default_icon": {
     "16": "images/rouvy.png",
     "32": "images/rouvy.png",
