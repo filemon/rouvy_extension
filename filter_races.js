@@ -1,6 +1,19 @@
-chrome.runtime.onMessage.addListener(
-    async function(request, sender, sendResponse) {
-    const buttonSelector = 'div.moreButton[id="snippet-moreButtonPlanned-component"] > a';
+const buttonSelector = 'div.moreButton[id="snippet-moreButtonPlanned-component"] > a';
+
+function createButton() {
+    let button = document.createElement('button');
+    button.type = "button";
+    button.className = 'btn btn-info';
+    button.onclick = async function () {
+        await filterRaces();
+    };
+    button.style.marginTop = '10px';
+    button.innerHTML = 'show official only';
+    return button;
+}
+
+async function filterRaces() {
+
     for(let i=0;i<5;i++){
         try {
             console.log('Clicking the "Next" button.');
@@ -13,6 +26,8 @@ chrome.runtime.onMessage.addListener(
             console.log(`Error: ${err}`);
         }
     }
-    sendResponse('Done');
     $('div.planned div.avatar22 a').not('a[href="/ROUVY"]').closest('tr').remove();
-});
+};
+
+
+$('div.moreButton[id="snippet-moreButtonPlanned-component"]').parent('div')[0].appendChild(createButton());

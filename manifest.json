@@ -18,10 +18,7 @@
       ],
       "run_at": "document_end"
     }],
-  "page_action": {
-    "default_popup": "popup.html"
-  },
-  
+
   "default_icon": {
     "16": "images/rouvy.png",
     "32": "images/rouvy.png",
@@ -33,6 +30,5 @@
     "32": "images/rouvy.png",
     "48": "images/rouvy.png",
     "128": "images/rouvy.png"
-  },
-  "permissions": ["declarativeContent","activeTab"]
+  }
 }
