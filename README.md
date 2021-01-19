@@ -2,7 +2,7 @@
 
 # Installation
 
-1. Unpack the zip file
+1. Download the latest [release](https://github.com/filemon/rouvy_extension/releases/latest) and unpack the zip file on your computer
 2. Open extensions configuration - Chrome - chrome://extensions or  Brave - brave://extensions
 3. You should see the Developer switch in the upper right corner - switch it to Developer Mode on
 4. Load Unpacked should be in the left upper corner now. Click it and point it to the unzipped directory (step 1)
