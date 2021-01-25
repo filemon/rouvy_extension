@@ -1,7 +1,7 @@
 const Apify = require('apify');
 const site = 'https://my.rouvy.com/filemon/career';
 
-Apify.main(async () => {
+Apify.main(async () => { 
 
     console.log('Launching Puppeteer...');
 
