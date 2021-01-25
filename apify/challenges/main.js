@@ -13,7 +13,7 @@ async function getChallengeDetails(page,url) {
             let details = [];
             const routes = $('h3 a[href*="/virtual-routes"]');
             routes.each(function() {
-                details.push(`${site}${(this).attr('href')}`);
+                details.push(`${site}${$(this).attr('href')}`);
             });
             return details;
         },site);
