@@ -44,7 +44,6 @@ function getChallenges() {
 async function filterRaces() {
     for(let i=0;i<5;i++){
         try {
-            console.log('Clicking the "Next" button.');
             await $(nextButtonSelector)[0].click();
             // Default timeout first time.
             await new Promise(function(resolve) {setTimeout(resolve, 2000)});
@@ -135,7 +134,6 @@ function careerSteps(career,race_link) {
 function challengeRaces(challenges,race_link) {
     let ret = [];
     Object.keys(challenges.challenges).forEach(link =>  {
-        console.log(link);
         if(challenges.challenges[link].routes.includes(race_link)) {
             ret.push(challenges.challenges[link].name);
         }
@@ -146,7 +144,6 @@ function challengeRaces(challenges,race_link) {
 function adjustNextButton() {
     let button = $(nextButtonSelector)[0];
     button.onclick = async function () {
-        console.log("Next button click");
         await new Promise(function(resolve) {setTimeout(resolve, 2000)});
         adjustNextButton(); //register event handler on fresh button;
         await enrichDetails();
