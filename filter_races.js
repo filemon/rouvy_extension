@@ -31,6 +31,16 @@ function getCareerDetails() {
     });
 }
 
+function getChallenges() {
+    console.log('Getting challenges');
+    return new Promise(function(resolve) {
+        chrome.storage.local.get(['rouvy_challenges'], function(result) {
+            resolve(JSON.parse(result.rouvy_challenges));
+        })
+    });
+}
+
+
 async function filterRaces() {
     for(let i=0;i<5;i++){
         try {
@@ -56,6 +66,7 @@ function appendField(header, sibling, tag, text) {
 function updateTableHeader() {
     if($('div.tabcont.oncont.box.planned thead th:contains("Ascended")').length == 0) {
         const header_row = $('div.tabcont.oncont.box.planned thead tr')[0];
+        appendField(header_row, header_row.children[4], 'th', "Challenge");
         appendField(header_row, header_row.children[4], 'th', "Carreer");
         appendField(header_row, header_row.children[4], 'th', "MAX %");
         appendField(header_row, header_row.children[4], 'th', "AVG %");
@@ -66,8 +77,9 @@ function updateTableHeader() {
     }
 }
 
-function updateRaceDetail(row,details,carreer) {
+function updateRaceDetail(row,details,carreer, challenges) {
     if($(row).children('td:contains("%")').length == 0) {
+        appendField(row, row.children[4], 'td', challenges);
         appendField(row, row.children[4], 'td', carreer);
         appendField(row, row.children[4], 'td', details.max_grade);
         appendField(row, row.children[4], 'td', details.avg_grade);
@@ -82,6 +94,8 @@ async function enrichDetails() {
     updateTableHeader();
     let race_details = await getRaceDetails();
     let career = await getCareerDetails();
+    let challenges = await getChallenges();
+
     $('div.planned div.avatar22 a').closest('tr').each(function() {
        let race_link = $($(this).find('a.btn')).attr('href');
        let race = race_details['races'][race_link];
@@ -97,9 +111,10 @@ async function enrichDetails() {
                    }
            }
        }
-        updateRaceDetail(this, race.details, careerSteps(career,race.details.link));
+        updateRaceDetail(this, race.details, careerSteps(career,race.details.link),challengeRaces(challenges, race.details.link));
     });
 }
+
 
 function careerSteps(career,race_link) {
     let result = career.steps.map((step,index) => {
@@ -115,6 +130,17 @@ function careerSteps(career,race_link) {
         return item != '';
     });
     return result.join();
+}
+
+function challengeRaces(challenges,race_link) {
+    let ret = [];
+    Object.keys(challenges.challenges).forEach(link =>  {
+        console.log(link);
+        if(challenges.challenges[link].routes.includes(race_link)) {
+            ret.push(challenges.challenges[link].name);
+        }
+    });
+    return ret.join();
 }
 
 function adjustNextButton() {

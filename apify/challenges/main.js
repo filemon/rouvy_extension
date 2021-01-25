@@ -9,14 +9,14 @@ async function getChallengeDetails(page,url) {
     let details = {};
 
     try {
-        details = await page.evaluate(async () => {
+        details = await page.evaluate(async (site) => {
             let details = [];
             const routes = $('h3 a[href*="/virtual-routes"]');
             routes.each(function() {
-                details.push($(this).attr('href'));
+                details.push(`${site}${(this).attr('href')}`);
             });
             return details;
-        });
+        },site);
     } catch(err) {
         console.log('Error when getting details:' + err);
     }

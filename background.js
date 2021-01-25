@@ -27,4 +27,12 @@ function downloadRouvyDetails() {
             console.log('local storage updated - career');
         });
     });
+
+    console.log("Downloading challenges");
+    fetch('https://api.apify.com/v2/key-value-stores/nFrxbygRB2CnxK7QS/records/challenges?disableRedirect=true').then(r => r.text()).then(result => {
+        chrome.storage.local.set({'rouvy_challenges': result}, function () {
+            console.log('local storage updated - challenges');
+        });
+    });
+
 }
