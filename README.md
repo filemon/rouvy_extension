@@ -17,5 +17,8 @@ That's it, Rouvy beautifier extension should be active now. Test it on https://m
 
 Special button button is present below the next button. If you click it, the page reloads couple of times and filter out upcoming official races. It takes around 10 secs, so be patient. You can click it subsequently in order to load more official races (if there are any).
 
+## Show additional race info
+
+Additional info like route precise name, avg and maximum % is present so it's easier to decide which race to join without necessary clicking. Should the race route be a mandatory task for either career or active challenge, the information is present there as well. 
 
 More to come
