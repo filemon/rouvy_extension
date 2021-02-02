@@ -56,6 +56,18 @@ async function filterRaces() {
     $('div.planned div.avatar22 a').not('a[href="/ROUVY"]').closest('tr').remove();
 };
 
+function filterRegistrations(race_details) {
+    $('div.tableVT.invitations a').each(function() {
+            let race_link =$(this).attr('href');
+            console.log(race_link);
+            let race = race_details['races'][race_link];
+            console.log(race);
+            if(!race) { //remove old invitations
+                $(this).closest('tr').remove();
+            }
+    });
+}
+
 function appendField(header, sibling, tag, text) {
     const field = document.createElement(tag);
     field.innerHTML = text;
@@ -94,6 +106,8 @@ async function enrichDetails() {
     let race_details = await getRaceDetails();
     let career = await getCareerDetails();
     let challenges = await getChallenges();
+
+    filterRegistrations(race_details);
 
     $('div.planned div.avatar22 a').closest('tr').each(function() {
        let race_link = $($(this).find('a.btn')).attr('href');
