@@ -18,6 +18,16 @@
         "filter_races.js"
       ],
       "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://my.rouvy.com/virtual-routes"
+      ],
+      "js": [
+        "jquery.js",
+        "manage_favourites.js"
+      ],
+      "run_at": "document_end"
     }],
 
   "default_icon": {

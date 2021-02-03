@@ -59,9 +59,7 @@ async function filterRaces() {
 function filterRegistrations(race_details) {
     $('div.tableVT.invitations a').each(function() {
             let race_link =$(this).attr('href');
-            console.log(race_link);
             let race = race_details['races'][race_link];
-            console.log(race);
             if(!race) { //remove old invitations
                 $(this).closest('tr').remove();
             }
