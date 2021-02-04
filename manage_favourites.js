@@ -1,16 +1,18 @@
 function add_remove_button(parent,route_link) {
-    let div = document.createElement('div');
-    div.className = 'btn btn-danger favouriteButton';
-    div.onclick = async function () {
-        await remove_route(parent,route_link);
-    };
+    if(parent.children('div.btn-danger.favouriteButton').length === 0) {
+        let div = document.createElement('div');
+        div.className = 'btn btn-danger favouriteButton';
+        div.onclick = async function () {
+            await remove_route(parent, route_link);
+        };
 
-    let span = document.createElement('span');
-    span.className = 'icon icon-heart-outline';
-    const text = document.createTextNode("Remove from my favourites");
-    span.appendChild(text);
-    div.appendChild(span);
-    parent[0].appendChild(div);
+        let span = document.createElement('span');
+        span.className = 'icon icon-heart-outline';
+        const text = document.createTextNode("Remove from my favourites");
+        span.appendChild(text);
+        div.appendChild(span);
+        parent[0].appendChild(div);
+    }
 }
 
 
@@ -51,7 +53,7 @@ var observer = new MutationObserver(function(mutations, observer) {
 
 // define what element should be observed by the observer
 // and what types of mutations trigger the callback
-observer.observe($('div.tabs_container.boxcont')[0], {
+observer.observe($('div.oncont.categories')[0], {
     subtree: true,
     attributes: true
     //...
