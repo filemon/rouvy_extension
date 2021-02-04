@@ -1,5 +1,13 @@
 const nextButtonSelector = 'div.moreButton[id="snippet-moreButtonPlanned-component"] > a';
 
+function getChallenges() {
+    console.log('Getting challenges');
+    return new Promise(function(resolve) {
+        chrome.storage.local.get(['rouvy_challenges'], function(result) {
+            resolve(JSON.parse(result.rouvy_challenges));
+        })
+    });
+}
 
 function createButton() {
     let button = document.createElement('button');
@@ -30,16 +38,6 @@ function getCareerDetails() {
         })
     });
 }
-
-function getChallenges() {
-    console.log('Getting challenges');
-    return new Promise(function(resolve) {
-        chrome.storage.local.get(['rouvy_challenges'], function(result) {
-            resolve(JSON.parse(result.rouvy_challenges));
-        })
-    });
-}
-
 
 async function filterRaces() {
     for(let i=0;i<5;i++){

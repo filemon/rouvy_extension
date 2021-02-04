@@ -19,11 +19,10 @@ function add_remove_button(parent,route_link) {
 
 function remove_route(parent,route_link) {
     let main_url = "https://my.rouvy.com";
-    let referrer = "https://my.rouvy.com";
     $.ajax({
         url: `${main_url}${route_link}?do=favouriteButton-remove`,
         dataType: "json",
-        headers: {'X-Alt-Referer': referrer },
+        headers: {'X-Alt-Referer': main_url },
         success: function(data){
             console.log(data);
         }
@@ -43,18 +42,12 @@ function enrich_page() {
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
 var observer = new MutationObserver(function(mutations, observer) {
-    // fired when a mutation occurs
-    console.log(mutations, observer);
     if($('strong.text-primary:contains("My favorite")').length > 0) {
         enrich_page();
     }
-    // ...
 });
 
-// define what element should be observed by the observer
-// and what types of mutations trigger the callback
 observer.observe($('div.oncont.categories')[0], {
     subtree: true,
     attributes: true
-    //...
 });

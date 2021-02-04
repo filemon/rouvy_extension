@@ -28,6 +28,15 @@
         "manage_favourites.js"
       ],
       "run_at": "document_end"
+    }, {
+      "matches": [
+        "https://my.rouvy.com/challenges"
+      ],
+      "js": [
+        "jquery.js",
+        "manage_challenges.js"
+      ],
+      "run_at": "document_end"
     }],
 
   "default_icon": {
