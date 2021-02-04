@@ -67,9 +67,11 @@ Apify.main(async () => {
     page.on('console', consoleObj => console.log(consoleObj.text()));
 
     console.log('Scanning available races');
-    const races = await page.evaluate(async () => {
+    const input =  await Apify.getValue('INPUT');
+    const races = await page.evaluate(async (input) => {
         const buttonSelector = 'div.moreButton[id="snippet-moreButtonPlanned-component"] > a';
-        for(let i=0;i<10;i++){
+        const number_of_pages = input["number_of_pages"] || 10;
+        for(let i=0;i<number_of_pages;i++){
             try {
                 console.log('Clicking the "More" button.');
                 await $(buttonSelector).click();
@@ -99,7 +101,7 @@ Apify.main(async () => {
         });
 
         return races;
-    });
+    },input);
     browser.close();
 
     for(var link in races['races']) {
