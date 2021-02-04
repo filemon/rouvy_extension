@@ -73,13 +73,17 @@ Apify.main(async () => {
 
     let challenges = await page.evaluate(async (site) => {
         let ret = {"challenges": {}};
-        let challenges = $('div.challengeCont.actual').children();
+        //ongoing challenges
+        let ongoing_challenges = $('div.challengeCont.actual').children();
+        let upcoming_challenges =  $('div.tabcont.upcoming').children('div.challengeCont').children();
+        const challenges = ongoing_challenges.add(upcoming_challenges);
         challenges.each(function() {
             const challengeLink = 'a[href*="/challenges"]';
             let link = $($(this).find(challengeLink));
             let link_addr = site + link.attr('href');
             ret["challenges"][link_addr] = {name: link.text(), link: link_addr, routes:[]};
         });
+
         return ret;
     },site);
 
