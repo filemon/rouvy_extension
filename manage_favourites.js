@@ -42,7 +42,7 @@ function enrich_page() {
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
 var observer = new MutationObserver(function(mutations, observer) {
-    if($('strong.text-primary:contains("My favorite")').length > 0) {
+    if($('strong.text-primary:contains("My favorite"),strong.text-primary:contains("Moje oblíbené")').length > 0) {
         enrich_page();
     }
 });

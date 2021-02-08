@@ -107,6 +107,7 @@ async function enrichDetails() {
 
     $('div.planned div.avatar22 a').closest('tr').each(function() {
        let race_link = $($(this).find('a.btn')).attr('href');
+       race_link = translateString(race_link);
        let race = race_details['races'][race_link];
        if(!race) { //some races might be missing in the source
            race = {
@@ -158,6 +159,10 @@ function adjustNextButton() {
         adjustNextButton(); //register event handler on fresh button;
         await enrichDetails();
     };
+}
+
+function translateString(input) {
+    return input.replace('online-zavody','onlinerace').replace('virtuelle-strecken','onlinerace');
 }
 
 

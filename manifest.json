@@ -11,7 +11,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://my.rouvy.com/onlinerace"
+        "https://my.rouvy.com/onlinerace",
+        "https://my.rouvy.com/online-zavody"
       ],
       "js": [
         "jquery.js",
@@ -21,7 +22,9 @@
     },
     {
       "matches": [
-        "https://my.rouvy.com/virtual-routes"
+        "https://my.rouvy.com/virtual-routes",
+        "https://my.rouvy.com/virtualni-trasy",
+        "https://my.rouvy.com/virtuelle-strecken"
       ],
       "js": [
         "jquery.js",
