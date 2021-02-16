@@ -58,13 +58,15 @@ Apify.main(async () => {
         return {record_time: record_time, button: $(button).text()};
     });
 
-    //have to wait for AJAX after a button click
-    const [response] = await Promise.all([
-        page.click(`a[href*="page=${initial_page_info.button}"]`),
-        page.waitForResponse(response => {
-            return response.request().url().startsWith('https://my.rouvy.com');
-        })
-    ]);
+    if(initial_page_info.button) { //we have more pages
+        //have to wait for AJAX after a button click
+        const [response] = await Promise.all([
+            page.click(`a[href*="page=${initial_page_info.button}"]`),
+            page.waitForResponse(response => {
+                return response.request().url().startsWith('https://my.rouvy.com');
+            })
+        ]);
+    }
 
     details = await page.evaluate(async (record_time) => {
         let name = $('h1 > strong').text();
