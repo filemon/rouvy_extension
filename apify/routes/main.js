@@ -88,6 +88,7 @@ Apify.main(async () => {
     }
     routes[input.url] = details;
     await rouvy_store.setValue('routes', routes);
+    await Apify.setValue("OUTPUT", details);
     await Apify.pushData(details);
 
     console.log('Done.');
