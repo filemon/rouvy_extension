@@ -31,6 +31,15 @@ Apify.main(async () => {
     console.dir(input);
 
     if (!input || !input.url) throw new Error('Input must be a JSON object with the "url" field!');
+    let rouvy_store = await Apify.openKeyValueStore('rouvy');
+    let routes = await rouvy_store.getValue('routes');
+    let details = routes[input.url];
+    if(details) {
+        console.log('Route already scraped, bailing out');
+        await Apify.setValue("OUTPUT", details);
+        await Apify.pushData(details);
+        return details;
+    }
 
     const browser = await Apify.launchPuppeteer();
 
@@ -57,7 +66,7 @@ Apify.main(async () => {
         })
     ]);
 
-    const details = await page.evaluate(async (record_time) => {
+    details = await page.evaluate(async (record_time) => {
         let name = $('h1 > strong').text();
         let author = $("td:contains('Author')").first().next().text();
         let rating = $('div.stars').attr('data-rating');
@@ -94,8 +103,8 @@ Apify.main(async () => {
     console.log('Closing Puppeteer...');
     await browser.close();
 
-    const rouvy_store = await Apify.openKeyValueStore('rouvy');
-    let routes = await rouvy_store.getValue('routes');
+    rouvy_store = await Apify.openKeyValueStore('rouvy');
+    routes = await rouvy_store.getValue('routes');
     if(!routes) {
         routes = {};
     }
