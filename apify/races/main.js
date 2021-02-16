@@ -8,9 +8,9 @@ function convert(fromStr,toStr, conversionRate, decimalPlaces) {
     return `${to.toFixed(decimalPlaces)} ${toStr}`;
 }
 
-// function milesToKm(miles) {
-//     return convert(miles,'km',1.6087,2);
-// }
+function milesToKm(miles) {
+    return convert(miles,'km',1.6087,2);
+}
 
 function feetsToM(feets) {
     return convert(feets,'m',0.3048,0);
