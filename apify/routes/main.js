@@ -56,7 +56,7 @@ Apify.main(async () => {
             return response.request().url().startsWith('https://my.rouvy.com');
         })
     ]);
-    
+
     const details = await page.evaluate(async (record_time) => {
         let name = $('h1 > strong').text();
         let author = $("td:contains('Author')").first().next().text();

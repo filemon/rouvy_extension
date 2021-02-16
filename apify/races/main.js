@@ -1,6 +1,7 @@
 const Apify = require('apify');
 const site = 'https://my.rouvy.com';
 
+
 function convert(fromStr,toStr, conversionRate, decimalPlaces) {
     let from = Number(fromStr.split(/\s/)[0]);
     console.log('converting ' + from);
@@ -106,6 +107,13 @@ Apify.main(async () => {
 
     for(var link in races['races']) {
         let details = await getRaceDetails(link,site);
+
+        let input = {"url":details.link};
+        //get the route details
+        const call = await Apify.call('filemon/rouvy-routes',input);
+        let route_details = call.output;
+        console.log(route_details);
+        details['estimated_time'] = route_details.estimated_time;
         details['ascended'] = feetsToM(details['ascended']);
         races['races'][link]['details'] = details;
     }
