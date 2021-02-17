@@ -125,7 +125,6 @@ Apify.main(async () => {
         details['estimated_time'] = route_details.value.estimated_time;
         details['ascended'] = feetsToM(details['ascended']);
         races['races'][link]['details'] = details;
-        console.log(races);
     }
     // await Promise.all(races['races'].map(async (race) => {
     //    let details = await getRaceDetails(race['link'],site);
