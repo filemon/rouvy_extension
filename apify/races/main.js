@@ -69,6 +69,8 @@ Apify.main(async () => {
 
     console.log('Scanning available races');
     const input =  await Apify.getValue('INPUT');
+    console.log('Input:');
+
     const races = await page.evaluate(async (input) => {
         const buttonSelector = 'div.moreButton[id="snippet-moreButtonPlanned-component"] > a';
         const number_of_pages = input["number_of_pages"] || 10;
@@ -109,20 +111,21 @@ Apify.main(async () => {
     let scraped_races = await store.getValue('official_races') || {"races":{}};
 
     for(var link in races['races']) {
-        if(scraped_races.races[link]) {
-            console.log('Race already scraped, skipping');
+        if(scraped_races.races[link] && input.use_cache) {
+            console.log('Race already scraped and using cache, skipping');
             continue;
         }
         let details = await getRaceDetails(link,site);
 
-        let input = {"url":details.link, "use_cache": true};
+        let routes_input = {"url":details.link, "use_cache": input.use_cache};
         //get the route details
-        const call = await Apify.call('filemon/rouvy-routes',input);
+        const call = await Apify.call('filemon/rouvy-routes',routes_input);
         let route_details = call.output;
-        console.log(route_details);
-        details['estimated_time'] = route_details.estimated_time;
+        console.log(route_details.value);
+        details['estimated_time'] = route_details.value.estimated_time;
         details['ascended'] = feetsToM(details['ascended']);
         races['races'][link]['details'] = details;
+        console.log(races);
     }
     // await Promise.all(races['races'].map(async (race) => {
     //    let details = await getRaceDetails(race['link'],site);

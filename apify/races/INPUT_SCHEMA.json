@@ -8,6 +8,12 @@
       "type": "string",
       "description": "Number of race pages to scan",
       "editor": "textfield"
+    },
+    "use_cache": {
+      "title": "Whether to use already scraped results",
+      "type": "boolean",
+      "description": "Whether to use already scraped results",
+      "editor": "checkbox"
     }},
   "required": []
 }
