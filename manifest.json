@@ -16,7 +16,7 @@
       ],
       "js": [
         "jquery.js",
-        "filter_races.js"
+        "manage_races.js"
       ],
       "run_at": "document_end"
     },

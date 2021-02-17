@@ -70,7 +70,7 @@ function enrich_favourites() {
 function enrich_routes(routes) {
     $('div.box.route').each(function() {
         let tbody_description = $(this).find('tbody');
-        let route_link = find_route_link($(this));
+        let route_link = find_route_link($(this)).replace('virtualni-trasy','virtual-routes').replace('virtuelle-strecken','virtual-routes');
         const route = routes[`${main_url}${route_link}`];
         let time = "unknown";
         if(route) {
