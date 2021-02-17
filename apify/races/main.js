@@ -115,7 +115,7 @@ Apify.main(async () => {
         }
         let details = await getRaceDetails(link,site);
 
-        let input = {"url":details.link};
+        let input = {"url":details.link, "use_cache": true};
         //get the route details
         const call = await Apify.call('filemon/rouvy-routes',input);
         let route_details = call.output;
