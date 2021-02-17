@@ -34,8 +34,8 @@ Apify.main(async () => {
     let rouvy_store = await Apify.openKeyValueStore('rouvy');
     let routes = await rouvy_store.getValue('routes');
     let details = routes[input.url];
-    if(details) {
-        console.log('Route already scraped, bailing out');
+    if(details && input.use_cache) {
+        console.log('Route already scraped and use_cache is true, bailing out');
         await Apify.setValue("OUTPUT", details);
         await Apify.pushData(details);
         return details;

@@ -1,0 +1,20 @@
+{
+  "title": "Input schema for the routes actor.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "url": {
+      "title": "Route URL on Rouvy.com",
+      "type": "string",
+      "description": "Route URL on Rouvy.com",
+      "editor": "textfield"
+    },
+    "use_cache": {
+      "title": "Whether to use already scraped results",
+      "type": "string",
+      "description": "Whether to use already scraped results",
+      "editor": "textfield"
+    }},
+
+  "required": ["url","use_cache"]
+}
