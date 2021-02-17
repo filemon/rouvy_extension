@@ -105,7 +105,14 @@ Apify.main(async () => {
     },input);
     browser.close();
 
+    let store = await Apify.openKeyValueStore('rouvy');
+    let scraped_races = await store.getValue('official_races') || {"races":{}};
+
     for(var link in races['races']) {
+        if(scraped_races.races[link]) {
+            console.log('Race already scraped, skipping');
+            continue;
+        }
         let details = await getRaceDetails(link,site);
 
         let input = {"url":details.link};
@@ -122,7 +129,7 @@ Apify.main(async () => {
     //    race['details'] = details;
     // }));
     // Store the results to the default dataset.
-    const store = await Apify.openKeyValueStore('rouvy');
+     store = await Apify.openKeyValueStore('rouvy');
     await store.setValue('official_races', races);
     await Apify.pushData(races);
     console.log("Script finnished");
