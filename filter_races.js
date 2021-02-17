@@ -73,6 +73,7 @@ function appendField(header, sibling, tag, text) {
 function updateTableHeader() {
     if($('div.tabcont.oncont.box.planned thead th:contains("Ascended")').length == 0) {
         const header_row = $('div.tabcont.oncont.box.planned thead tr')[0];
+        appendField(header_row, header_row.children[4], 'th', "Estimated time (~2 W/kg)");
         appendField(header_row, header_row.children[4], 'th', "Challenge");
         appendField(header_row, header_row.children[4], 'th', "Carreer");
         appendField(header_row, header_row.children[4], 'th', "MAX %");
@@ -86,6 +87,7 @@ function updateTableHeader() {
 
 function updateRaceDetail(row,details,carreer, challenges) {
     if($(row).children('td:contains("%")').length == 0) {
+        appendField(row, row.children[4], 'td', details.estimated_time);
         appendField(row, row.children[4], 'td', challenges);
         appendField(row, row.children[4], 'td', carreer);
         appendField(row, row.children[4], 'td', details.max_grade);
@@ -117,7 +119,8 @@ async function enrichDetails() {
                        "avg_grade": "",
                        "capacity": "",
                        "route": "",
-                       "link": ""
+                       "link": "",
+                       "estimated_time":""
                    }
            }
        }
@@ -166,7 +169,7 @@ function translateString(input) {
 }
 
 
-$('div.moreButton[id="snippet-moreButtonPlanned-component"]').parent('div')[0].appendChild(createButton());
+//$('div.moreButton[id="snippet-moreButtonPlanned-component"]').parent('div')[0].appendChild(createButton());
 (async () => {
     await enrichDetails(); //enrich details on already loaded page
     adjustNextButton(); //enrich them after each next button click

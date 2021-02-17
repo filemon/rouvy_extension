@@ -28,7 +28,7 @@
       ],
       "js": [
         "jquery.js",
-        "manage_favourites.js"
+        "manage_routes.js"
       ],
       "run_at": "document_end"
     }, {

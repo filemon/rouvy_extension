@@ -35,4 +35,10 @@ function downloadRouvyDetails() {
         });
     });
 
+    console.log("Downloading routes");
+    fetch('https://api.apify.com/v2/key-value-stores/nFrxbygRB2CnxK7QS/records/routes?disableRedirect=true').then(r => r.text()).then(result => {
+        chrome.storage.local.set({'rouvy_routes': result}, function () {
+            console.log('local storage updated - routes');
+        });
+    });
 }

@@ -111,11 +111,13 @@ Apify.main(async () => {
     let scraped_races = await store.getValue('official_races') || {"races":{}};
 
     for(var link in races['races']) {
+        let details = {};
         if(scraped_races.races[link] && input.use_cache) {
             console.log('Race already scraped and using cache, skipping');
-            continue;
+            details = scraped_races.races[link].details;
+        } else {
+            details = await getRaceDetails(link, site);
         }
-        let details = await getRaceDetails(link,site);
 
         let routes_input = {"url":details.link, "use_cache": input.use_cache};
         //get the route details
@@ -131,7 +133,7 @@ Apify.main(async () => {
     //    race['details'] = details;
     // }));
     // Store the results to the default dataset.
-     store = await Apify.openKeyValueStore('rouvy');
+    store = await Apify.openKeyValueStore('rouvy');
     await store.setValue('official_races', races);
     await Apify.pushData(races);
     console.log("Script finnished");
