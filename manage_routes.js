@@ -29,7 +29,7 @@ function add_remove_button(parent,route_link) {
 
 function add_estimated_time(parent, time) {
     const label_string = 'Estimated time (2 W/kg)';
-    if(parent.children(`td:contains(${label_string})`).length === 0) {
+    if(parent.find(`td:contains(${label_string})`).length === 0) {
         let tr = document.createElement('tr');
         let td_label = document.createElement('td');
         td_label.className = 'label';
