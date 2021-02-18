@@ -27,6 +27,8 @@ async function getChallengeDetails(page,url) {
 Apify.main(async () => {
 
     console.log('Launching Puppeteer...');
+    const rouvy_store = await Apify.openKeyValueStore('rouvy');
+    let scraped_challenges = await rouvy_store.getValue('challenges');
 
     const browser = await Apify.launchPuppeteer();
     const page = await browser.newPage();
@@ -88,12 +90,16 @@ Apify.main(async () => {
     },site);
 
     for(var link in challenges['challenges']) {
-        let details = await getChallengeDetails(page,link);
+        let details = scraped_challenges.challenges[link];
+        if(scraped_challenges.challenges[link]){ //check the store for already scraped challenges
+            details = scraped_challenges.challenges[link].routes;
+        }  else {
+            details = await getChallengeDetails(page, link);
+        }
         challenges.challenges[link].routes = details;
     };
 
     console.log(challenges);
-    const rouvy_store = await Apify.openKeyValueStore('rouvy');
     await rouvy_store.setValue('challenges', challenges);
     await Apify.pushData(challenges);
 
