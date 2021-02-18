@@ -109,9 +109,10 @@ Apify.main(async () => {
 
     let store = await Apify.openKeyValueStore('rouvy');
     let scraped_races = await store.getValue('official_races') || {"races":{}};
-
+    let scraped_routes = await store.getValue('routes') || {"routes":{}};
     for(var link in races['races']) {
         let details = {};
+        let route_details = {};
         if(scraped_races.races[link] && input.use_cache) {
             console.log('Race already scraped and using cache, skipping');
             details = scraped_races.races[link].details;
@@ -119,20 +120,23 @@ Apify.main(async () => {
             details = await getRaceDetails(link, site);
         }
 
-        let routes_input = {"url":details.link, "use_cache": input.use_cache};
-        //get the route details
-        const call = await Apify.call('filemon/rouvy-routes',routes_input);
-        let route_details = call.output;
-        console.log(route_details.value);
-        details['estimated_time'] = route_details.value.estimated_time;
+
+        route_details = scraped_routes[details.link];
+
+        if(!route_details) {
+            let routes_input = {"url": details.link, "use_cache": input.use_cache};
+            //scrape route details
+            const call = await Apify.call('filemon/rouvy-routes', routes_input);
+            route_details = call.output.value;
+        } else {
+            console.log('Route already known, skipping route actor');
+        }
+
+        details['estimated_time'] = route_details.estimated_time;
         details['ascended'] = feetsToM(details['ascended']);
         races['races'][link]['details'] = details;
     }
-    // await Promise.all(races['races'].map(async (race) => {
-    //    let details = await getRaceDetails(race['link'],site);
-    //    race['details'] = details;
-    // }));
-    // Store the results to the default dataset.
+
     store = await Apify.openKeyValueStore('rouvy');
     await store.setValue('official_races', races);
     await Apify.pushData(races);
