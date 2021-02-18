@@ -8,12 +8,16 @@ function getChallenges() {
 }
 
 function add_add_to_favourites_button(parent) {
-    if(parent.children('div.btn-success.favouriteButton').length === 0) {
+    let challenge_link = $(parent.find('a')).attr('href');
+    challenge_link = `https://my.rouvy.com${challenge_link}`;
+
+    let challenge_scraped = challenges.challenges[challenge_link];
+
+    if(challenge_scraped && parent.children('div.btn-success.favouriteButton').length === 0) {
         let div = document.createElement('div');
         div.className = 'btn btn-success favouriteButton';
-        let challenge_link = $(parent.find('a')).attr('href');
-        div.onclick = async function () {
-            await add_routes_to_favourites(`https://my.rouvy.com${challenge_link}`);
+        div.onclick = async() => {
+            await add_routes_to_favourites(challenge_link, div);
         };
 
         let span = document.createElement('span');
@@ -26,31 +30,36 @@ function add_add_to_favourites_button(parent) {
 }
 
 
-async function add_routes_to_favourites(challenge_link) {
-   let challenges = await getChallenges();
+async function add_routes_to_favourites(challenge_link, button) {
    let routes = challenges.challenges[challenge_link].routes;
    if(routes) {
        routes.forEach(route_link => {
-          add_route_to_favourite(route_link);
+          add_route_to_favourite(route_link,button);
        });
    }
 }
 
-function add_route_to_favourite(route_link) {
+function add_route_to_favourite(route_link, button) {
     console.log('Adding to favourites ' + route_link);
     $.ajax({
         url: `${route_link}?do=favouriteButton-add`,
         dataType: "json",
         success: function(data){
+            button.remove();
             console.log(data);
         }
     });
 }
 
-function enrich_page() {
+let challenges = {};
+
+async function enrich_page() {
+    challenges = await getChallenges();
     $('div.challenge.box').each(function() {
         add_add_to_favourites_button($(this));
     });
 }
 
-enrich_page();
+(async () => {
+    await enrich_page();
+})();
