@@ -99,6 +99,10 @@ function updateRaceDetail(row,details,carreer, challenges) {
     }
 }
 
+function remove_special_parameters(link) {
+    return link.split('?')[0];
+}
+
 async function enrichDetails() {
     updateTableHeader();
     let race_details = await getRaceDetails();
@@ -109,7 +113,7 @@ async function enrichDetails() {
 
     $('div.planned div.avatar22 a').closest('tr').each(function() {
        let race_link = $($(this).find('a.btn')).attr('href');
-       race_link = translateString(race_link);
+       race_link = remove_special_parameters(translateString(race_link));
        let race = race_details['races'][race_link];
        if(!race) { //some races might be missing in the source
            race = {
@@ -169,7 +173,6 @@ function translateString(input) {
 }
 
 
-//$('div.moreButton[id="snippet-moreButtonPlanned-component"]').parent('div')[0].appendChild(createButton());
 (async () => {
     await enrichDetails(); //enrich details on already loaded page
     adjustNextButton(); //enrich them after each next button click

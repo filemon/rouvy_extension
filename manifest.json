@@ -11,8 +11,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://my.rouvy.com/onlinerace",
-        "https://my.rouvy.com/online-zavody"
+        "https://my.rouvy.com/onlinerace*",
+        "https://my.rouvy.com/online-zavody*"
       ],
       "js": [
         "jquery.js",
