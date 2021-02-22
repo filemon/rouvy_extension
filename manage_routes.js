@@ -1,5 +1,7 @@
 const main_url = "https://my.rouvy.com";
 
+const label_string = 'Time (2 W/kg)';
+
 function getRoutes() {
     console.log('Getting routes');
     return new Promise(function(resolve) {
@@ -28,7 +30,6 @@ function add_remove_button(parent,route_link) {
 }
 
 function add_estimated_time(parent, time) {
-    const label_string = 'Estimated time (2 W/kg)';
     if(parent.find(`td:contains(${label_string})`).length === 0) {
         let tr = document.createElement('tr');
         let td_label = document.createElement('td');
@@ -87,8 +88,10 @@ var observer = new MutationObserver(async function(mutations, observer) {
     if($('strong.text-primary:contains("My favorite"),strong.text-primary:contains("Moje oblíbené")').length > 0) {
         enrich_favourites();
     }
-    const routes = await getRoutes();
-    enrich_routes(routes);
+    if($(`div.oncont td.label:contains(${label_string})`).length === 0) {
+        const routes = await getRoutes();
+        enrich_routes(routes);
+    }
 });
 
 observer.observe($('div.oncont.categories')[0], {

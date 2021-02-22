@@ -73,13 +73,15 @@ function appendField(header, sibling, tag, text) {
 function updateTableHeader() {
     if($('div.tabcont.oncont.box.planned thead th:contains("Ascended")').length == 0) {
         const header_row = $('div.tabcont.oncont.box.planned thead tr')[0];
-        appendField(header_row, header_row.children[4], 'th', "Estimated time (~2 W/kg)");
-        appendField(header_row, header_row.children[4], 'th', "Challenge");
-        appendField(header_row, header_row.children[4], 'th', "Carreer");
-        appendField(header_row, header_row.children[4], 'th', "MAX %");
-        appendField(header_row, header_row.children[4], 'th', "AVG %");
-        appendField(header_row, header_row.children[4], 'th', "Ascended");
-        appendField(header_row, header_row.children[4], 'th', "Route");
+        if(header_row) { //we can be on the race detail
+            appendField(header_row, header_row.children[4], 'th', "Estimated time (~2 W/kg)");
+            appendField(header_row, header_row.children[4], 'th', "Challenge");
+            appendField(header_row, header_row.children[4], 'th', "Carreer");
+            appendField(header_row, header_row.children[4], 'th', "MAX %");
+            appendField(header_row, header_row.children[4], 'th', "AVG %");
+            appendField(header_row, header_row.children[4], 'th', "Ascended");
+            appendField(header_row, header_row.children[4], 'th', "Route");
+        }
     } else {
         console.log("Header already updated before");
     }
@@ -161,11 +163,15 @@ function challengeRaces(challenges,race_link) {
 
 function adjustNextButton() {
     let button = $(nextButtonSelector)[0];
-    button.onclick = async function () {
-        await new Promise(function(resolve) {setTimeout(resolve, 2000)});
-        adjustNextButton(); //register event handler on fresh button;
-        await enrichDetails();
-    };
+    if(button) {
+        button.onclick = async function () {
+            await new Promise(function (resolve) {
+                setTimeout(resolve, 2000)
+            });
+            adjustNextButton(); //register event handler on fresh button;
+            await enrichDetails();
+        };
+    }
 }
 
 function translateString(input) {
