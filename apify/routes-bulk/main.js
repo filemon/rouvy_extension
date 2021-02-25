@@ -63,7 +63,11 @@ async function scrapeCategoryPage(page) {
             log.info('Going to scrape ' + link);
             if (!scraped_routes[link]) {
                 let routes_input = {"url": link, "use_cache": true};
-                await Apify.call('filemon/rouvy-routes', routes_input);
+                try {
+                    await Apify.call('filemon/rouvy-routes', routes_input);
+                }catch(error) {
+                  log.info("Routes scraper call failed, never mind");
+                };
             } else {
                 log.info('Route already scraped, skipping');
             }
