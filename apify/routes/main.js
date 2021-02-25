@@ -48,6 +48,7 @@ Apify.main(async () => {
     log.info(`Opening page ${input.url}...`);
     const page = await browser.newPage();
     await page.goto(input.url);
+    await killPopup(page);
     let initial_page_info = await page.evaluate(() => {
         let buttons = $('div.records a.button');
         let page_index = 0;

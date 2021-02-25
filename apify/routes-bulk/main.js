@@ -11,7 +11,7 @@ const site = 'https://my.rouvy.com';
 
 async function getPageCount(page){
     return await page.evaluate(() => {
-        return $('div.oncont div.paginator a.ajax.button').length;
+        return Number.parseInt($('div.oncont div.paginator a.ajax.button').last().text());
     });
 }
 
@@ -29,13 +29,14 @@ async function scrapeCategory(page, category) {
         new Promise(function(resolve) {setTimeout(resolve, 3000)})
     ]);
     await killPopup(page);
-    let pageCount = await getPageCount(page);
-    log.info("Pages:" + pageCount);
+    let lastPage = await getPageCount(page);
+    log.info("Pages:" + lastPage);
     // scrape all pages for given category
-    for(let i=0; i < pageCount; i++) {
+    for(let i=2; i < lastPage+1; i++) {
         await killPopup(page);
+        log.info(i);
         await Promise.all([
-            page.click(`div.oncont div.paginator a.ajax.button[href="/virtual-routes?categoryPaginator-page=${i+2}"]`),
+            page.click(`div.oncont div.paginator a.ajax.button[href="/virtual-routes?categoryPaginator-page=${i}"]`),
             page.waitForResponse(response => {
                 return response.request().url().startsWith(site);
             })
