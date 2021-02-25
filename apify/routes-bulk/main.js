@@ -85,7 +85,7 @@ Apify.main(async () => {
         return categories;
     });
     log.info(categories);
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < categories.length; i++) {
         await scrapeCategory(page,categories[i]);
         await page.goto(url);
     };
