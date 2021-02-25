@@ -5,10 +5,11 @@
 // Import Apify SDK. For more information, see https://sdk.apify.com/
 const Apify = require('apify');
 
+const { utils: { log } } = Apify;
 
 function convert(fromStr,toStr, conversionRate, decimalPlaces) {
     let from = Number(fromStr.split(/\s/)[0]);
-    console.log('converting ' + from);
+    log.info('converting ' + from);
     let to = from*conversionRate;
     return `${to.toFixed(decimalPlaces)} ${toStr}`;
 }
@@ -21,9 +22,14 @@ function feetsToM(feets) {
     return convert(feets,'m',0.3048,0);
 }
 
+async function killPopup(page) {
+    log.info('Killing popup');
+    await page.evaluate(()=>document.querySelector('a.fontello.close').click());
+}
+
 Apify.main(async () => {
     const input = await Apify.getInput();
-    console.log('Input:');
+    log.info('Input:');
     console.dir(input);
 
     if (!input || !input.url) throw new Error('Input must be a JSON object with the "url" field!');
@@ -31,7 +37,7 @@ Apify.main(async () => {
     let routes = await rouvy_store.getValue('routes');
     let details = routes[input.url];
     if(details && input.use_cache) {
-        console.log('Route already scraped and use_cache is true, bailing out');
+        log.info('Route already scraped and use_cache is true, bailing out');
         await Apify.setValue("OUTPUT", details);
         await Apify.pushData(details);
         return details;
@@ -39,7 +45,7 @@ Apify.main(async () => {
 
     const browser = await Apify.launchPuppeteer();
 
-    console.log(`Opening page ${input.url}...`);
+    log.info(`Opening page ${input.url}...`);
     const page = await browser.newPage();
     await page.goto(input.url);
     let initial_page_info = await page.evaluate(() => {
@@ -56,12 +62,14 @@ Apify.main(async () => {
 
     if(initial_page_info.button) { //we have more pages
         //have to wait for AJAX after a button click
+        await killPopup(page);
         const [response] = await Promise.all([
             page.click(`a[href*="page=${initial_page_info.button}"]`),
             page.waitForResponse(response => {
                 return response.request().url().startsWith('https://my.rouvy.com');
             })
         ]);
+        await killPopup(page);
     }
 
     details = await page.evaluate(async (record_time) => {
@@ -97,8 +105,7 @@ Apify.main(async () => {
     },initial_page_info.record_time);
     details['ascended'] = feetsToM(details['ascended']);
     details['distance'] = milesToKm(details['distance']);
-    console.log(details);
-    console.log('Closing Puppeteer...');
+    log.info('Closing Puppeteer...');
     await browser.close();
 
     rouvy_store = await Apify.openKeyValueStore('rouvy');
@@ -111,5 +118,5 @@ Apify.main(async () => {
     await Apify.setValue("OUTPUT", details);
     await Apify.pushData(details);
 
-    console.log('Done.');
+    log.info('Done.');
 });

@@ -1,0 +1,701 @@
+
+
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Virtual routes around the world - GPS synchronized video, interesting places, laps, checkpoints</title>
+
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta http-equiv="Content-language" content="en">
+    <meta name="description" content="Do you have favorite routes that you would like to ride even when the weather is not ideal? No problem, virtual routes allow you to do just that. Virtual routes are displayed in Google Earth 3D globe, which is implemented within the UniVET System. The only thing you have to do is connect your ergometer to your computer and then…it’s almost like you were there...">
+    <meta name="keywords" content="virtual tours, virtual routes, real life video route,rlv DVD,Tour de France,indoor tracks,indoor route, video, animation tracks, Real Ride, Virtual Training, Virtualtraining, training portal, indoor training, training on ergometer, KETTLER, Ergorace, Ergo_bike, DAUM, Ergo_lyps, Axiom, ErgoBike Premium, CycleOps Power Beam, Indoor cycle, TACX trainer, Elite trainer, SRM power meter, PowerTap, training diary, GPS data import, online race, interval training, cardio, fitness, group training, sport rankings, computrainer, Kinetic, UniVET System, ErgoPlanet, Tour Concept, FitViewer, Kettler World Tour, Virtual Active, PraxTour, Computrainer">
+    <meta name="author" content="VirtualTraining s.r.o">
+    <meta name="copyright" content="(c) copyright 2003 - 2021 VirtualTraining s.r.o. All rights reserved.">
+    <meta name="resource-type" content="document">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <meta property="og:url" content="https://my.rouvy.com/virtual-routes">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Rouvy | Virtual routes around the world - GPS synchronized video, interesting places, laps, checkpoints">
+    <meta property="og:description" content="Do you have favorite routes that you would like to ride even when the weather is not ideal? No problem, virtual routes allow you to do just that. Virtual routes are displayed in Google Earth 3D globe, which is implemented within the UniVET System. The only thing you have to do is connect your ergometer to your computer and then…it’s almost like you were there...">
+    <meta property="fb:app_id" content="399122466810229">
+    <meta property="og:image" content="https://cdn.rouvy.com/ogimage/default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="628">
+
+
+
+    <!-- include scripts, styles, feeds -->
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.rouvy.com/www/css/bootstrap/bootstrap.css?v=1614168270">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rouvy.com/www/css/basic.css?v=1614168270">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Work+Sans:400,700,900&amp;amp;subset=latin-ext">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rouvy.com/www/css/Routes/routes.css?v=1614168270">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rouvy.com/www/css/Routes/default.css?v=1614168270">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rouvy.com/www/css/menu.css?v=1614168270">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rouvy.com/www/css/footer_old.css?v=1614168270">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rouvy.com/www/css/tabs.css?v=1614168270">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rouvy.com/www/css/Routes/search.css?v=1614168270">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rouvy.com/www/css/jquery-ui-1.10.3.VT.css?v=1614168270">
+
+    <script type="text/javascript">
+        if(document.documentMode === 11){
+            var head = document.head, link = document.createElement('link');
+            link.type = 'text/css'; link.rel = 'stylesheet'; link.href = "https:\/\/cdn.rouvy.com\/www" + '/css/ie.css';
+            head.appendChild(link);
+        }
+    </script>
+    <!--[if IE]> <link rel="stylesheet" type="text/css" href="https://cdn.rouvy.com/www/css/ie.css" /> <![endif]-->
+    <!--[if IE 8]> <link rel="stylesheet" type="text/css" href="https://cdn.rouvy.com/www/css/ie8.css" /> <![endif]-->
+    <!--[if IE 7]> <link rel="stylesheet" type="text/css" href="https://cdn.rouvy.com/www/css/ie7.css" /> <![endif]-->
+
+
+
+
+    <link rel="shortcut icon" href="https://cdn.rouvy.com/www/favicon.ico?r=1" type="image/x-icon">
+    <script type="text/javascript">
+        window.dictionary = window.dictionary || {};
+
+        window.dictionary.OK = "OK"; // confirm button OK
+        window.dictionary.cancel = "Cancel"; // confirm button cancel
+        window.dictionary.registerButton = "Register"; //button for host forms submits
+
+        window.dictionary.ajaxError = "Application request failed. Please try again later.";
+    </script>
+    <script type="text/javascript">
+        window.timezoneOffsetSignal = "\/en\/login\/timezoneoffset?do=timeZoneOffset";
+        window.findTimezoneOffset = false;
+
+        window.VT = window.VT || {};
+        VT.devel = 0;
+        VT.imagesPath = "https:\/\/cdn.rouvy.com\/www\/images"
+
+        var rootDomain = "rouvy.com";
+        var timezoneOffsetCookieName = "svt-UTC-tzHOffset";
+        var isHost = false;
+        var fbAppId = 399122466810229;
+    </script>
+
+
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="9d84ddf7-3296-46c0-bead-e5037da6c7ca" data-blockingmode="manual" type="text/javascript"></script>
+
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WBFJ5S8');</script>
+    <!-- End Google Tag Manager -->
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-3518570311651368",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window,document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '143668832779363');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" src="https://www.facebook.com/tr?id=143668832779363&ev=PageView&noscript=1"></noscript>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/external_unmanaged/jquery-1.10.1.min.js?v=1614168282" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/external_unmanaged/jquery.nette.js?v=1614168282" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/dist/basic.min.js?v=1614168393" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/dist/timeZone.min.js?v=1614168395" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/external_unmanaged/netteForms.js?v=1614168282" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/external_unmanaged/jquery-ui-1.9.2.draggable.min.js?v=1614168282" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/dist/overInfoBox.min.js?v=1614168394" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/dist/popupBanner.min.js?v=1614168394" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/dist/Routes/default.min.js?v=1614168401" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/external/bootstrap.min.js?v=1469462010" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/dist/tabs.min.js?v=1614168395" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/external_unmanaged/jquery-ui-1.9.1.custom.min.js?v=1614168282" defer></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyBnh0hom7FA6JxJkClO-9UuEwKXzmtnVc8" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/dist/Routes/GRoute.min.js?v=1614168402" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/external_unmanaged/google-maps-markers-cluster.js?v=1614168282" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/dist/Routes/map.min.js?v=1614168402" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/dist/VTforms.min.js?v=1614168396" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/dist/Routes/searchRoutes.min.js?v=1614168402" defer></script>
+    <script type="text/javascript" src="https://cdn.rouvy.com/www/js/dist/rangeSlider.min.js?v=1614168395" defer></script>
+
+
+</head>
+
+<body class="Routes-default ">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WBFJ5S8" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+<nav class="navbar vt-navbar navbar-default blackbg ">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+            </button>
+            <a class="navbar-brand" href="https://rouvy.com/en/"></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul id='controls' class="nav navbar-nav controls ">
+                <li class='typeB login standardItem'>
+                    <a  href='/en' class="" >
+                        Log in
+
+                    </a>
+                </li>
+
+                <li class='typeB signup standardItem'>
+                    <a  href='https://rouvy.com/en/download' class="downloadClass " >
+                        Download
+
+                    </a>
+                </li>
+
+            </ul>
+            <ul id='mainmenu' class="nav navbar-nav leftmenu level_0 ">
+                <li class='typeV dropdown standardItem'>
+                    <a  class=" dropdown-toggle" data-toggle="dropdown">
+                        Training
+
+                    </a>
+                    <ul class="dropdown-menu second-level-icons level_1">
+                        <li class='diary_calendar standardItem'>
+                            <a  href='/user-training-diary?lang=en' class="" >
+                                Training Diary
+
+                            </a>
+                        </li>
+
+                        <li class='diary_agenda standardItem'>
+                            <a  href='/user-training-diary/agenda?lang=en' class="" >
+                                Agenda
+
+                            </a>
+                        </li>
+
+                        <li class='diary_import standardItem'>
+                            <a  href='/user-imports/upload?lang=en' class="" >
+                                Activity import
+
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+                <li class='typeV active dropdown standardItem'>
+                    <a  class=" dropdown-toggle" data-toggle="dropdown">
+                        Explore
+
+                    </a>
+                    <ul class="dropdown-menu second-level-icons level_1">
+                        <li class='explore_routes_recommended standardItem'>
+                            <a  href='/virtual-routes/recommended' class="" >
+                                Recommended routes
+
+                            </a>
+                        </li>
+
+                        <li class='explore_routes standardItem active'>
+                            <a  href='/virtual-routes' class="" >
+                                Virtual Routes
+
+                            </a>
+                        </li>
+
+                        <li class='explore_routes_new standardItem'>
+                            <a  href='/virtual-routes/latest' class="" >
+                                New routes
+
+                            </a>
+                        </li>
+
+                        <li class='explore_workouts standardItem'>
+                            <a  href='/workouts' class="" >
+                                Workouts
+
+                            </a>
+                        </li>
+
+                        <li class='explore_onlineraces standardItem'>
+                            <a  href='/onlinerace' class="" >
+                                Races
+
+                            </a>
+                        </li>
+
+                        <li class='explore_challenges standardItem'>
+                            <a  href='/challenges' class="" >
+                                Challenges
+
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+                <li class='typeV dropdown standardItem'>
+                    <a  class=" dropdown-toggle" data-toggle="dropdown">
+                        Rankings
+
+                    </a>
+                    <ul class="dropdown-menu second-level-icons level_1">
+                        <li class='ranking_default standardItem'>
+                            <a  href='/public-rankings/seasonresults' class="" >
+                                Season results
+
+                            </a>
+                        </li>
+
+                        <li class='ranking_default standardItem'>
+                            <a  href='/public-rankings/legends' class="" >
+                                The Rouvy Legends
+
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+                <li class='typeV dropdown standardItem'>
+                    <a  class=" dropdown-toggle" data-toggle="dropdown">
+                        Resources
+
+                    </a>
+                    <ul class="dropdown-menu second-level-icons level_1">
+                        <li class='blog standardItem'>
+                            <a  href='https://blog.rouvy.com/en' class="" >
+                                Blog
+
+                            </a>
+                        </li>
+
+                        <li class='helpdesk standardItem'>
+                            <a  href='https://support.rouvy.com/' class="" >
+                                Help Desk
+
+                            </a>
+                        </li>
+
+                        <li class='howitworks standardItem'>
+                            <a  href='https://rouvy.com/en/how-it-works' class="" >
+                                How it works
+
+                            </a>
+                        </li>
+
+                        <li class='videotutorials standardItem'>
+                            <a  href='https://www.youtube.com/playlist?list=PLwwCbqxd7s12y0OplqlmaLpnKMcjkrqHK' class="" >
+                                Video Tutorials
+
+                            </a>
+                        </li>
+
+                        <li class='download standardItem'>
+                            <a  href='https://rouvy.com/en/download' class="" >
+                                Download app
+
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="navigation">
+
+
+
+
+</div>
+
+<div class="msgCont" id="snippet--msgCont">
+</div>
+
+<div id="page">
+    <div class="container">
+
+        <script type="text/javascript">
+            window.routes = window.routes || {};
+            window.routes.routesDefaultLink = "\/virtual-routes"
+            window.routes.routesDetailsLink = "\/virtual-routes?do=LoadRoutesDetails"
+
+            window.dictionary = window.dictionary || {};
+            window.dictionary.loaderMapText = "loading route geometries...";
+        </script>
+
+        <div id="content" class="routes">
+            <h1 class="leftside">Catalog of virtual routes</h1>
+            <div class="rightside bold routesCount">Total&nbsp;2042364.19&nbsp;mi</div>
+
+            <div class="search">
+                <div class="tabs_container boxcont">
+                    <ul>
+                        <li id='tab_category' class="ontab"><h2>CATEGORIES</h2></li>
+                        <li id="tab_map"><h2>MAP</h2></li>
+                        <li id="tab_search"><h2>SEARCH</h2></li>
+                    </ul>
+
+
+                    <div class="oncont tabcont transpCont categories formClosed">
+                        <div class="box formCont">
+                            <div class="padding20">
+
+                                <form action="/virtual-routes" method="post" id="frm-searchCategoryForm" class="ajax">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-4 mb15"><input type="text" name="name" placeholder="route name" class="form-control" id="frm-searchCategoryForm-name" data-nette-rules='[{"op":":filled","rules":[{"op":":minLength","msg":"Search by name keyword must be min. 3 chars.","arg":3}],"control":"name"}]'></div>
+                                        <div class="col-xs-12 col-sm-4 mb15"><span class="label-group"><input type="hidden" name="category" value="36"></span></div>
+                                        <div class="col-xs-12 col-sm-4 mb15"><span class="label-group"><label for="frm-searchCategoryForm-orderby">Order</label><select name="orderby" class="form-control" id="frm-searchCategoryForm-orderby"><option value="rating" selected>by rating</option><option value="name">by name</option><option value="author">by author</option><option value="distance">by distance</option><option value="upclimb">by ascent</option><option value="updated">by date</option></select></span></div>
+                                    </div>
+
+
+
+                                    <div class="cleaner"></div>
+                                    <div class="loader"></div>
+
+                                    <input type="hidden" name="categoryName" value="Recommended"><input type="hidden" name="_do" value="searchCategoryForm-submit"><!--[if IE]><input type=IEbug disabled style="display:none"><![endif]-->
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="row categoryList">
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="36" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/RouteCategoryRecommended\.png)">
+                                    <span>Recommended</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="3" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/category-favorite\.png)">
+                                    <span>My favorite</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="2" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/category-created\.png)">
+                                    <span>Created</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="30" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/RouteCategoryIRONMAN\.png)">
+                                    <span>IRONMAN</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="29" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/RouteCategoryCyclingUnlimited\.png)">
+                                    <span>Cycling Unlimited</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="35" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/RouteCategoryUKCyclingEvents\.png)">
+                                    <span>UK Cycling Events</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="37" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/RouteCategoryLaVuelta\.png)">
+                                    <span>La Vuelta</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="38" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/RouteCategoryPedalitaly1\.png)">
+                                    <span>Pedalitaly</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="26" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/RouteCategoryClimbs\.png)">
+                                    <span>Climbs</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="27" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/RouteCategoryFamous\.png)">
+                                    <span>Famous courses</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="28" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/RouteCategoryTopNonAR\.png)">
+                                    <span>Top non-AR</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="31" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/RouteCategoryFlat\.png)">
+                                    <span>Flat</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="32" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/RouteCategoryShortDistances\.png)">
+                                    <span>Short </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="33" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/RouteCategoryLongDistances\.png)">
+                                    <span>Long </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 col-lg-3">
+                                <div class="category" data-category="34" style="background-image:url(https\:\/\/storage\.googleapis\.com\/cdn\.virtualtraining\.eu\/categories\/routes\/RouteCategoryHandy\.png)">
+                                    <span>Handbikes</span>
+                                </div>
+                            </div>
+                            <div class="cleaner"></div>
+                        </div>
+                        <div class='categorySearch'>
+                            <a class="btn btn-link icon icon-list-left backButton">Back to categories list</a>
+                            <div class="bold resultInfo" id="snippet--resultInfoCategory"><span></span></div>
+                            <div class="row cleaner resCont" id="snippet--categoryRoutes">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tabcont transpCont mapcont">
+                        <div class="box formCont">
+                            <div class="padding20">
+
+                                <form action="/virtual-routes" method="post" id="frm-searchMapForm" class="ajax">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 mb15"><input type="text" name="location" placeholder="select location" class="form-control" id="frm-searchMapForm-location"></div>
+                                    </div>
+
+                                    <div class="row advanced">
+                                        <hr>
+
+                                        <div class="col-xs-6 col-md-3">
+                                            <div class="checkGroup nowrap"><span><label for="frm-searchMapForm-certification">Certified route</label></span><span><input type="checkbox" name="certification" id="frm-searchMapForm-certification"></span></div>
+                                            <div class="checkGroup nowrap"><span><label for="frm-searchMapForm-video">Video</label></span><span><input type="checkbox" name="video" id="frm-searchMapForm-video"></span></div>
+                                            <div class="checkGroup nowrap"><span><label for="frm-searchMapForm-supportsar">AR route</label></span><span><input type="checkbox" name="supportsar" id="frm-searchMapForm-supportsar"></span></div>
+                                        </div>
+                                        <div class="col-xs-6 col-md-3">
+                                            <div class="label-group"><span><label for="frm-searchMapForm-countrycode">Country</label></span> <span><select name="countrycode" class="form-control" id="frm-searchMapForm-countrycode"><option value="">---</option><option value="AF">Afghanistan</option><option value="AL">Albania</option><option value="DZ">Algeria</option><option value="AS">American Samoa</option><option value="AD">Andorra</option><option value="AO">Angola</option><option value="AI">Anguilla</option><option value="AQ">Antarctica</option><option value="AG">Antigua and Barbuda</option><option value="AR">Argentina</option><option value="AM">Armenia</option><option value="AW">Aruba</option><option value="AU">Australia</option><option value="AT">Austria</option><option value="AZ">Azerbaijan</option><option value="BS">Bahamas</option><option value="BH">Bahrain</option><option value="BD">Bangladesh</option><option value="BB">Barbados</option><option value="BY">Belarus</option><option value="BE">Belgium</option><option value="BZ">Belize</option><option value="BJ">Benin</option><option value="BM">Bermuda</option><option value="BT">Bhutan</option><option value="BO">Bolivia</option><option value="BA">Bosnia and Herzegovi</option><option value="BW">Botswana</option><option value="BV">Bouvet Island</option><option value="BR">Brazil</option><option value="IO">British Indian Ocean</option><option value="BN">Brunei Darussalam</option><option value="BG">Bulgaria</option><option value="BF">Burkina Faso</option><option value="BI">Burundi</option><option value="KH">Cambodia</option><option value="CM">Cameroon</option><option value="CA">Canada</option><option value="CV">Cape Verde</option><option value="KY">Cayman Islands</option><option value="CF">Central African Republic</option><option value="TD">Chad</option><option value="CL">Chile</option><option value="CN">China</option><option value="CX">Christmas Island</option><option value="WA">Cocos Islands</option><option value="CO">Colombia</option><option value="KM">Comoros</option><option value="CG">Congo</option><option value="CK">Cook Islands</option><option value="CR">Costa Rica</option><option value="CI">Cote D'ivoire</option><option value="HR">Croatia</option><option value="CU">Cuba</option><option value="CY">Cyprus</option><option value="CZ">Czech Republic</option><option value="DK">Denmark</option><option value="DJ">Djibouti</option><option value="DM">Dominica</option><option value="DO">Dominican Republic</option><option value="TL">East Timor</option><option value="EC">Ecuador</option><option value="EG">Egypt</option><option value="SV">El Salvador</option><option value="CQ">Equatorial Guinea</option><option value="ER">Eritrea</option><option value="EE">Estonia</option><option value="ET">Ethiopia</option><option value="FK">Falkland Islands</option><option value="FO">Faroe Islands</option><option value="FJ">Fiji</option><option value="FI">Finland</option><option value="FR">France</option><option value="GF">French Guina</option><option value="PF">French Polynesia</option><option value="TF">French Southern Terr</option><option value="GA">Gabon</option><option value="GM">Gambia</option><option value="DE">Germany</option><option value="GH">Ghana</option><option value="GI">Gibraltar</option><option value="GB">Great Britain</option><option value="GB2">Great Britain</option><option value="GR">Greece</option><option value="GL">Greenland</option><option value="GD">Grenada</option><option value="GU">Guam</option><option value="GT">Guatemala</option><option value="GN">Guinea</option><option value="GW">Guinea-Bissau</option><option value="GY">Guyana</option><option value="HT">Haiti</option><option value="HM">Heard Island And Mcd</option><option value="HN">Honduras</option><option value="HK">Hong Kong</option><option value="HU">Hungary</option><option value="IS">Iceland</option><option value="IN">India</option><option value="ID">Indonesia</option><option value="IR">Iran</option><option value="IQ">Iraq</option><option value="IE">Ireland</option><option value="IM">Isle of Man</option><option value="IL">Israel</option><option value="IT">Italy</option><option value="JM">Jamaica</option><option value="JP">Japan</option><option value="JO">Jordan</option><option value="KZ">Kazakhstan</option><option value="KE">Kenya</option><option value="KI">Kiribati</option><option value="KW">Kuwait</option><option value="KG">Kyrgyzstan</option><option value="LA">Lao Peoples Democrat</option><option value="LV">Latvia</option><option value="LB">Lebanon</option><option value="LS">Lesotho</option><option value="LR">Liberia</option><option value="LY">Libyan Arab Jamahiri</option><option value="LI">Liechtenstein</option><option value="LT">Lithuania</option><option value="LU">Luxembourg</option><option value="MO">Macau</option><option value="MG">Madagascar</option><option value="MK">Makedonia</option><option value="MW">Malawi</option><option value="MY">Malaysia</option><option value="MV">Maldives</option><option value="ML">Mali</option><option value="MT">Malta</option><option value="MH">Marshall Islands</option><option value="MQ">Martinique</option><option value="MR">Mauritania</option><option value="MU">Mauritius</option><option value="YT">Mayotte</option><option value="MX">Mexico</option><option value="FM">Micronesia</option><option value="MD">Moldova</option><option value="MC">Monaco</option><option value="MN">Mongolia</option><option value="MS">Montserrat</option><option value="MA">Morocco</option><option value="MZ">Mozambique</option><option value="MM">Myanmar</option><option value="NA">Namibia</option><option value="NR">Nauru</option><option value="NP">Nepal</option><option value="NL">Netherlands</option><option value="AN">Netherlands Antilles</option><option value="NC">New Caledonia</option><option value="NZ">New Zealand</option><option value="NI">Nicaragua</option><option value="NE">Niger</option><option value="NG">Nigeria</option><option value="NU">Niue</option><option value="NF">Norfolk Island</option><option value="MP">Northern Mariana Isl</option><option value="NO">Norway</option><option value="OM">Oman</option><option value="PK">Pakistan</option><option value="PW">Palau</option><option value="PA">Panama</option><option value="PG">Papua New Guinea</option><option value="PY">Paraguay</option><option value="PE">Peru</option><option value="PH">Philippines</option><option value="PN">Pitcairn</option><option value="PL">Poland</option><option value="PT">Portugal</option><option value="PR">Puerto Rico</option><option value="QA">Qatar</option><option value="KP">Republic of Korea</option><option value="RE">Reunion</option><option value="RO">Romania</option><option value="RU">Russia</option><option value="RW">Rwanda</option><option value="SH">Saint Helena</option><option value="KN">Saint Kitts and Nevi</option><option value="LC">Saint Lucia</option><option value="PM">Saint Pierre and Miq</option><option value="VC">Saint Vincent and the Grenadines</option><option value="WS">Samoa</option><option value="SM">San Marino</option><option value="ST">Sao Tome and Principe</option><option value="SA">Saudi Arabia</option><option value="SN">Senegal</option><option value="RS">Serbia</option><option value="SC">Seychelles</option><option value="SL">Sierra Leone</option><option value="SG">Singapore</option><option value="SK">Slovakia</option><option value="SI">Slovenia</option><option value="SB">Solomon Islands</option><option value="SO">Somalia</option><option value="ZA">South Africa</option><option value="GS">South Georgia and Sa</option><option value="KR">South Korea</option><option value="ES">Spain</option><option value="LK">Sri Lanka</option><option value="SD">Sudan</option><option value="SR">Suriname</option><option value="SJ">Svalbard</option><option value="SZ">Swaziland</option><option value="SE">Sweden</option><option value="CH">Switzerland</option><option value="SY">Syrian Arab Republic</option><option value="TW">Taiwan</option><option value="TJ">Tajikistan</option><option value="TZ">Tanzania</option><option value="TH">Thailand</option><option value="TG">Togo</option><option value="TK">Tokelau</option><option value="TO">Tonga</option><option value="TT">Trinidad and Tobago</option><option value="TN">Tunisia</option><option value="TR">Turkey</option><option value="TM">Turkmenistan</option><option value="TC">Turks and Caicos Islands</option><option value="TV">Tuvalu</option><option value="UG">Uganda</option><option value="UA">Ukraine</option><option value="AE">United Arab Emirates</option><option value="US">United States</option><option value="UM">United States Minor Outlying Islands</option><option value="UY">Uruguay</option><option value="UZ">Uzbekistan</option><option value="VU">Vanuatu</option><option value="VA">Vatican City State</option><option value="VE">Venezuela</option><option value="VN">Vietnam</option><option value="VI">Virgin Islands</option><option value="WF">Wallis And Futuna Island</option><option value="EH">Western Sahara</option><option value="YE">Yemen</option><option value="CD">Zaire</option><option value="ZM">Zambia</option><option value="ZW">Zimbabwe</option></select></span></div>
+                                            <div class="label-group"><span><label for="frm-searchMapForm-owner">Author</label></span> <span><input type="text" name="owner" placeholder="Author" class="form-control" id="frm-searchMapForm-owner"></span></div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6 sliders">
+                                            <script type="text/javascript">
+                                                var sliderUpclimbMax = sliderUpclimbMaxInit = 15000;
+                                            </script>
+                                            <table>
+                                                <tr>
+                                                    <td class="min"><label for="frm-searchMapForm-lengthfrom">Distance [mi]</label> <input type="number" name="lengthfrom" class="form-control" id="frm-searchMapForm-lengthfrom" data-nette-rules='[{"op":"optional"},{"op":":integer","msg":"Please enter a valid integer."}]' value="0"></td>
+                                                    <td class="slider"><div id="searchMapForm-sliderDistance"></div></td>
+                                                    <td class="max"><input type="number" name="lengthto" class="form-control" id="frm-searchMapForm-lengthto" data-nette-rules='[{"op":"optional"},{"op":":integer","msg":"Please enter a valid integer."}]' value="200"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="min"><label for="frm-searchMapForm-avgslopefrom">AVG grade [%]</label> <input type="number" name="avgslopefrom" class="form-control" id="frm-searchMapForm-avgslopefrom" data-nette-rules='[{"op":"optional"},{"op":":integer","msg":"Please enter a valid integer."}]' value="0"></td>
+                                                    <td class="slider"><div id="searchMapForm-sliderAvgslope"></div></td>
+                                                    <td class="max"><input type="number" name="avgslopeto" class="form-control" id="frm-searchMapForm-avgslopeto" data-nette-rules='[{"op":"optional"},{"op":":integer","msg":"Please enter a valid integer."}]' value="50"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="min"><label for="frm-searchMapForm-climbfrom">Ascended [ft]</label> <input type="number" name="climbfrom" class="form-control" id="frm-searchMapForm-climbfrom" data-nette-rules='[{"op":"optional"},{"op":":integer","msg":"Please enter a valid integer."}]' value="0"></td>
+                                                    <td class="slider"><div id="searchMapForm-sliderUpclimb"></div></td>
+                                                    <td class="max"><input type="number" name="climbto" class="form-control" id="frm-searchMapForm-climbto" data-nette-rules='[{"op":"optional"},{"op":":integer","msg":"Please enter a valid integer."}]' value="15000"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                        <input type="hidden" name="mapview[nelatitude]" value="">
+                                        <input type="hidden" name="mapview[nelongitude]" value="">
+                                        <input type="hidden" name="mapview[swlatitude]" value="">
+                                        <input type="hidden" name="mapview[swlongitude]" value="">
+                                    </div>
+
+                                    <hr class='lower'>
+                                    <div class="errors"></div>
+
+                                    <input type="submit" name="_submit" class="btn btn-success" value="Search">
+                                    <button type="button" class="btn btn-default resetButton">Reset</button>
+
+                                    <div class="cleaner"></div>
+                                    <div class="loader"></div>
+
+                                    <input type="hidden" name="_do" value="searchMapForm-submit"></form>
+
+                            </div>
+                        </div>
+                        <div class="bold resultInfo" id="snippet--resultInfoMap"><span></span></div>
+                        <div class="box bggrey resCont">
+                            <div class="map" id="map"></div>
+                        </div>
+                    </div>
+
+                    <div class="tabcont transpCont fullsearch">
+                        <div class="box formCont">
+                            <div class="padding20">
+
+                                <form action="/virtual-routes" method="post" id="frm-searchRoutesForm" class="ajax">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-4 mb15"><input type="text" name="name" placeholder="route name" class="form-control" id="frm-searchRoutesForm-name" data-nette-rules='[{"op":":filled","rules":[{"op":":minLength","msg":"Search by name keyword must be min. 3 chars.","arg":3}],"control":"name"}]'></div>
+                                        <div class="col-xs-12 col-sm-4 mb15"><span class="label-group"><label for="frm-searchRoutesForm-category">Category</label><select name="category" class="form-control" id="frm-searchRoutesForm-category"><option value=""> --- </option><option value="36">Recommended</option><option value="3">My favorite</option><option value="2">Created</option><option value="30">IRONMAN</option><option value="29">Cycling Unlimited</option><option value="35">UK Cycling Events</option><option value="37">La Vuelta</option><option value="38">Pedalitaly</option><option value="26">Climbs</option><option value="27">Famous courses</option><option value="28">Top non-AR</option><option value="31">Flat</option><option value="32">Short </option><option value="33">Long </option><option value="34">Handbikes</option></select></span></div>
+                                        <div class="col-xs-12 col-sm-4 mb15"><span class="label-group"><label for="frm-searchRoutesForm-orderby">Order</label><select name="orderby" class="form-control" id="frm-searchRoutesForm-orderby"><option value="rating" selected>by rating</option><option value="name">by name</option><option value="author">by author</option><option value="distance">by distance</option><option value="upclimb">by ascent</option><option value="updated">by date</option></select></span></div>
+                                    </div>
+
+                                    <div class="row advanced">
+                                        <hr>
+
+                                        <div class="col-xs-6 col-md-3">
+                                            <div class="checkGroup nowrap"><span><label for="frm-searchRoutesForm-certification">Certified route</label></span><span><input type="checkbox" name="certification" id="frm-searchRoutesForm-certification"></span></div>
+                                            <div class="checkGroup nowrap"><span><label for="frm-searchRoutesForm-video">Video</label></span><span><input type="checkbox" name="video" id="frm-searchRoutesForm-video"></span></div>
+                                            <div class="checkGroup nowrap"><span><label for="frm-searchRoutesForm-supportsar">AR route</label></span><span><input type="checkbox" name="supportsar" id="frm-searchRoutesForm-supportsar"></span></div>
+                                        </div>
+                                        <div class="col-xs-6 col-md-3">
+                                            <div class="label-group"><span><label for="frm-searchRoutesForm-countrycode">Country</label></span> <span><select name="countrycode" class="form-control" id="frm-searchRoutesForm-countrycode"><option value="">---</option><option value="AF">Afghanistan</option><option value="AL">Albania</option><option value="DZ">Algeria</option><option value="AS">American Samoa</option><option value="AD">Andorra</option><option value="AO">Angola</option><option value="AI">Anguilla</option><option value="AQ">Antarctica</option><option value="AG">Antigua and Barbuda</option><option value="AR">Argentina</option><option value="AM">Armenia</option><option value="AW">Aruba</option><option value="AU">Australia</option><option value="AT">Austria</option><option value="AZ">Azerbaijan</option><option value="BS">Bahamas</option><option value="BH">Bahrain</option><option value="BD">Bangladesh</option><option value="BB">Barbados</option><option value="BY">Belarus</option><option value="BE">Belgium</option><option value="BZ">Belize</option><option value="BJ">Benin</option><option value="BM">Bermuda</option><option value="BT">Bhutan</option><option value="BO">Bolivia</option><option value="BA">Bosnia and Herzegovi</option><option value="BW">Botswana</option><option value="BV">Bouvet Island</option><option value="BR">Brazil</option><option value="IO">British Indian Ocean</option><option value="BN">Brunei Darussalam</option><option value="BG">Bulgaria</option><option value="BF">Burkina Faso</option><option value="BI">Burundi</option><option value="KH">Cambodia</option><option value="CM">Cameroon</option><option value="CA">Canada</option><option value="CV">Cape Verde</option><option value="KY">Cayman Islands</option><option value="CF">Central African Republic</option><option value="TD">Chad</option><option value="CL">Chile</option><option value="CN">China</option><option value="CX">Christmas Island</option><option value="WA">Cocos Islands</option><option value="CO">Colombia</option><option value="KM">Comoros</option><option value="CG">Congo</option><option value="CK">Cook Islands</option><option value="CR">Costa Rica</option><option value="CI">Cote D'ivoire</option><option value="HR">Croatia</option><option value="CU">Cuba</option><option value="CY">Cyprus</option><option value="CZ">Czech Republic</option><option value="DK">Denmark</option><option value="DJ">Djibouti</option><option value="DM">Dominica</option><option value="DO">Dominican Republic</option><option value="TL">East Timor</option><option value="EC">Ecuador</option><option value="EG">Egypt</option><option value="SV">El Salvador</option><option value="CQ">Equatorial Guinea</option><option value="ER">Eritrea</option><option value="EE">Estonia</option><option value="ET">Ethiopia</option><option value="FK">Falkland Islands</option><option value="FO">Faroe Islands</option><option value="FJ">Fiji</option><option value="FI">Finland</option><option value="FR">France</option><option value="GF">French Guina</option><option value="PF">French Polynesia</option><option value="TF">French Southern Terr</option><option value="GA">Gabon</option><option value="GM">Gambia</option><option value="DE">Germany</option><option value="GH">Ghana</option><option value="GI">Gibraltar</option><option value="GB">Great Britain</option><option value="GB2">Great Britain</option><option value="GR">Greece</option><option value="GL">Greenland</option><option value="GD">Grenada</option><option value="GU">Guam</option><option value="GT">Guatemala</option><option value="GN">Guinea</option><option value="GW">Guinea-Bissau</option><option value="GY">Guyana</option><option value="HT">Haiti</option><option value="HM">Heard Island And Mcd</option><option value="HN">Honduras</option><option value="HK">Hong Kong</option><option value="HU">Hungary</option><option value="IS">Iceland</option><option value="IN">India</option><option value="ID">Indonesia</option><option value="IR">Iran</option><option value="IQ">Iraq</option><option value="IE">Ireland</option><option value="IM">Isle of Man</option><option value="IL">Israel</option><option value="IT">Italy</option><option value="JM">Jamaica</option><option value="JP">Japan</option><option value="JO">Jordan</option><option value="KZ">Kazakhstan</option><option value="KE">Kenya</option><option value="KI">Kiribati</option><option value="KW">Kuwait</option><option value="KG">Kyrgyzstan</option><option value="LA">Lao Peoples Democrat</option><option value="LV">Latvia</option><option value="LB">Lebanon</option><option value="LS">Lesotho</option><option value="LR">Liberia</option><option value="LY">Libyan Arab Jamahiri</option><option value="LI">Liechtenstein</option><option value="LT">Lithuania</option><option value="LU">Luxembourg</option><option value="MO">Macau</option><option value="MG">Madagascar</option><option value="MK">Makedonia</option><option value="MW">Malawi</option><option value="MY">Malaysia</option><option value="MV">Maldives</option><option value="ML">Mali</option><option value="MT">Malta</option><option value="MH">Marshall Islands</option><option value="MQ">Martinique</option><option value="MR">Mauritania</option><option value="MU">Mauritius</option><option value="YT">Mayotte</option><option value="MX">Mexico</option><option value="FM">Micronesia</option><option value="MD">Moldova</option><option value="MC">Monaco</option><option value="MN">Mongolia</option><option value="MS">Montserrat</option><option value="MA">Morocco</option><option value="MZ">Mozambique</option><option value="MM">Myanmar</option><option value="NA">Namibia</option><option value="NR">Nauru</option><option value="NP">Nepal</option><option value="NL">Netherlands</option><option value="AN">Netherlands Antilles</option><option value="NC">New Caledonia</option><option value="NZ">New Zealand</option><option value="NI">Nicaragua</option><option value="NE">Niger</option><option value="NG">Nigeria</option><option value="NU">Niue</option><option value="NF">Norfolk Island</option><option value="MP">Northern Mariana Isl</option><option value="NO">Norway</option><option value="OM">Oman</option><option value="PK">Pakistan</option><option value="PW">Palau</option><option value="PA">Panama</option><option value="PG">Papua New Guinea</option><option value="PY">Paraguay</option><option value="PE">Peru</option><option value="PH">Philippines</option><option value="PN">Pitcairn</option><option value="PL">Poland</option><option value="PT">Portugal</option><option value="PR">Puerto Rico</option><option value="QA">Qatar</option><option value="KP">Republic of Korea</option><option value="RE">Reunion</option><option value="RO">Romania</option><option value="RU">Russia</option><option value="RW">Rwanda</option><option value="SH">Saint Helena</option><option value="KN">Saint Kitts and Nevi</option><option value="LC">Saint Lucia</option><option value="PM">Saint Pierre and Miq</option><option value="VC">Saint Vincent and the Grenadines</option><option value="WS">Samoa</option><option value="SM">San Marino</option><option value="ST">Sao Tome and Principe</option><option value="SA">Saudi Arabia</option><option value="SN">Senegal</option><option value="RS">Serbia</option><option value="SC">Seychelles</option><option value="SL">Sierra Leone</option><option value="SG">Singapore</option><option value="SK">Slovakia</option><option value="SI">Slovenia</option><option value="SB">Solomon Islands</option><option value="SO">Somalia</option><option value="ZA">South Africa</option><option value="GS">South Georgia and Sa</option><option value="KR">South Korea</option><option value="ES">Spain</option><option value="LK">Sri Lanka</option><option value="SD">Sudan</option><option value="SR">Suriname</option><option value="SJ">Svalbard</option><option value="SZ">Swaziland</option><option value="SE">Sweden</option><option value="CH">Switzerland</option><option value="SY">Syrian Arab Republic</option><option value="TW">Taiwan</option><option value="TJ">Tajikistan</option><option value="TZ">Tanzania</option><option value="TH">Thailand</option><option value="TG">Togo</option><option value="TK">Tokelau</option><option value="TO">Tonga</option><option value="TT">Trinidad and Tobago</option><option value="TN">Tunisia</option><option value="TR">Turkey</option><option value="TM">Turkmenistan</option><option value="TC">Turks and Caicos Islands</option><option value="TV">Tuvalu</option><option value="UG">Uganda</option><option value="UA">Ukraine</option><option value="AE">United Arab Emirates</option><option value="US">United States</option><option value="UM">United States Minor Outlying Islands</option><option value="UY">Uruguay</option><option value="UZ">Uzbekistan</option><option value="VU">Vanuatu</option><option value="VA">Vatican City State</option><option value="VE">Venezuela</option><option value="VN">Vietnam</option><option value="VI">Virgin Islands</option><option value="WF">Wallis And Futuna Island</option><option value="EH">Western Sahara</option><option value="YE">Yemen</option><option value="CD">Zaire</option><option value="ZM">Zambia</option><option value="ZW">Zimbabwe</option></select></span></div>
+                                            <div class="label-group"><span><label for="frm-searchRoutesForm-owner">Author</label></span> <span><input type="text" name="owner" placeholder="Author" class="form-control" id="frm-searchRoutesForm-owner"></span></div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6 sliders">
+                                            <script type="text/javascript">
+                                                var sliderUpclimbMax = sliderUpclimbMaxInit = 15000;
+                                            </script>
+                                            <table>
+                                                <tr>
+                                                    <td class="min"><label for="frm-searchRoutesForm-lengthfrom">Distance [mi]</label> <input type="number" name="lengthfrom" class="form-control" id="frm-searchRoutesForm-lengthfrom" data-nette-rules='[{"op":"optional"},{"op":":integer","msg":"Please enter a valid integer."}]' value="0"></td>
+                                                    <td class="slider"><div id="searchRoutesForm-sliderDistance"></div></td>
+                                                    <td class="max"><input type="number" name="lengthto" class="form-control" id="frm-searchRoutesForm-lengthto" data-nette-rules='[{"op":"optional"},{"op":":integer","msg":"Please enter a valid integer."}]' value="200"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="min"><label for="frm-searchRoutesForm-avgslopefrom">AVG grade [%]</label> <input type="number" name="avgslopefrom" class="form-control" id="frm-searchRoutesForm-avgslopefrom" data-nette-rules='[{"op":"optional"},{"op":":integer","msg":"Please enter a valid integer."}]' value="0"></td>
+                                                    <td class="slider"><div id="searchRoutesForm-sliderAvgslope"></div></td>
+                                                    <td class="max"><input type="number" name="avgslopeto" class="form-control" id="frm-searchRoutesForm-avgslopeto" data-nette-rules='[{"op":"optional"},{"op":":integer","msg":"Please enter a valid integer."}]' value="50"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="min"><label for="frm-searchRoutesForm-climbfrom">Ascended [ft]</label> <input type="number" name="climbfrom" class="form-control" id="frm-searchRoutesForm-climbfrom" data-nette-rules='[{"op":"optional"},{"op":":integer","msg":"Please enter a valid integer."}]' value="0"></td>
+                                                    <td class="slider"><div id="searchRoutesForm-sliderUpclimb"></div></td>
+                                                    <td class="max"><input type="number" name="climbto" class="form-control" id="frm-searchRoutesForm-climbto" data-nette-rules='[{"op":"optional"},{"op":":integer","msg":"Please enter a valid integer."}]' value="15000"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                    <hr class='lower'>
+                                    <div class="errors"></div>
+
+                                    <input type="submit" name="_submit" class="btn btn-success" value="Search">
+                                    <button type="button" class="btn btn-default resetButton">Reset</button>
+
+                                    <div class="cleaner"></div>
+                                    <div class="loader"></div>
+
+                                    <input type="hidden" name="_do" value="searchRoutesForm-submit"></form>
+
+                            </div>
+                        </div>
+                        <div class="bold resultInfo" id="snippet--resultInfoSearch"><span></span></div>
+                        <div class="row resCont" id="snippet--routes">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cleaner"></div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-copyright  col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <img src="https://cdn.rouvy.com/www/images/menu/logo-rouvy.png">
+                    </div>
+                </div>
+                <div class="footer-wrap-text-copyright col-xs-12">
+                    <div class="row">
+                        <a class="footer-text-copyright" href="https://rouvy.com/en/contact">Copyright © 2021, VirtualTraining s.r.o. All rights reserved.</a>
+                        <span class="footer-links"><a class="footer-link" href="https://rouvy.com/en/terms-of-use">Terms of Use</a> | <a class="footer-link" href="https://rouvy.com/en/privacy-policy">Privacy Policy</a> | <a class="footer-link" href="https://cdn.rouvy.com/other/contest_rules.pdf" target="new">Contest rules</a> | <a class="footer-link" href="https://rouvy.com/en/contact">Contact</a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-nav col-lg-2 col-md-2 col-sm-3 col-xs-6">
+                <a href="https://rouvy.com/en/features">Features</a>
+                <a href="https://rouvy.com/en/how-it-works">How it works</a>
+                <a href="https://rouvy.com/en/pricing">Pricing</a>
+                <a href="https://rouvy.com/en/download">Download</a>
+
+            </div>
+            <div class="footer-nav col-lg-2 col-md-2 col-sm-3 col-xs-6">
+                <a href="https://blog.rouvy.com/en">Blog</a>
+                <a href="https://support.rouvy.com">Help Desk</a>
+                <a href="https://www.youtube.com/watch?v=OpZARhUi9cA&amp;list=PLwwCbqxd7s12y0OplqlmaLpnKMcjkrqHK" rel="nofollow">Video Tutorials</a>
+                <a href="https://rouvy.com/en/press">Press</a>
+                <a href="https://partner.rouvy.com">Rouvy for Business</a>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-8 col-xs-12">
+                4
+                <form method="POST" action="https://virtualtraining.activehosted.com/proc.php" id="_form_4_" class="_form _form_4 _inline-form  _dark" target="_blank" novalidate>
+                    <input type="hidden" name="u" value="4">
+                    <input type="hidden" name="f" value="4">
+                    <input type="hidden" name="s">
+                    <input type="hidden" name="c" value="0">
+                    <input type="hidden" name="m" value="0">
+                    <input type="hidden" name="act" value="sub">
+                    <input type="hidden" name="v" value="2">
+                    <label for="mce-EMAIL">Newsletter</label>
+                    <input type="email" name="email" class="form-control" placeholder="Enter e-mail" value="">
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_acac16c3781e7c7dff568bd85_42c0983d8c" tabindex="-1" value=""></div>
+                    <span class="footer-never-spam">Stay tuned</span>
+                    <input type="submit" value="Subscribe" name="subscribe" class="btn btn-primary">
+                </form>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-3 col-sm-offset-1 col-md-offset-0 col-xs-12">
+                <div class="footer-social-section footer-nav col-sm-12 col-xs-6">
+                    <a href="https://www.facebook.com/gorouvy/" rel="nofollow" target="_blank"><img src="https://cdn.rouvy.com/www/images/menu/icon-facebook.png">Facebook</a>
+                    <a href="https://twitter.com/gorouvy/" rel="nofollow" target="_blank"><img src="https://cdn.rouvy.com/www/images/menu/icon-twitter.png">Twitter</a>
+                </div>
+                <div class="footer-social-section footer-nav col-sm-12 col-xs-6">
+                    <a href="https://www.youtube.com/channel/UCwftBpV0rLUY7RT4knGO3DQ/featured" target="_blank" rel="nofollow"><img src="https://cdn.rouvy.com/www/images/menu/icon-youtube.png">YouTube</a>
+                    <a href="https://www.instagram.com/gorouvy/" target="_blank" rel="nofollow"><img src="https://cdn.rouvy.com/www/images/menu/icon-instagram.png">Instagram</a>
+                    <a href="https://www.strava.com/clubs/rouvy" target="_blank" rel="nofollow"><img src="https://cdn.rouvy.com/www/images/menu/icon-strava.png">Strava</a>
+                </div>
+            </div>
+            <div class="version col-xs-12">
+                v4.9.7
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<a href="https://support.rouvy.com" class="btn btn-lg text-info helpButton">?</a>
+
+<div id="popupBanner18" class="customOverlayVT hidden popupBanner" onload="VT.centerOverlay(this)" data-banner-d="10" data-banner-t="24">
+    <div class="box">
+        <a class="fontello close" onclick="javascript:this.parentNode.parentNode.style.display = 'none';">d</a>
+        <a href="http://bit.ly/TOUR-OF-SLOVENIA" target="_blank"><img src="https://cdn.rouvy.com/banners/2021-02-22-WEBSITEBANNER_03.jpg"></a>
+
+    </div>
+</div>
+
+</body>
+
+</html>

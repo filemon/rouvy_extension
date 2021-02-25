@@ -85,12 +85,14 @@ function enrich_routes(routes) {
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
 var observer = new MutationObserver(async function(mutations, observer) {
-    if($('strong.text-primary:contains("My favorite"),strong.text-primary:contains("Moje oblíbené")').length > 0) {
-        enrich_favourites();
-    }
     if($(`div.oncont td.label:contains(${label_string})`).length === 0) {
+        console.log(mutations);
         const routes = await getRoutes();
         enrich_routes(routes);
+
+        if($('strong.text-primary:contains("My favorite"),strong.text-primary:contains("Moje oblíbené")').length > 0) {
+            enrich_favourites();
+        }
     }
 });
 
