@@ -7,6 +7,8 @@ const Apify = require('apify');
 
 const { utils: { log } } = Apify;
 
+const site = 'https://my.rouvy.com';
+
 function convert(fromStr,toStr, conversionRate, decimalPlaces) {
     let from = Number(fromStr.split(/\s/)[0]);
     log.info('converting ' + from);
@@ -22,9 +24,13 @@ function feetsToM(feets) {
     return convert(feets,'m',0.3048,0);
 }
 
-async function killPopup(page) {
-    log.info('Killing popup');
-    await page.evaluate(()=>document.querySelector('a.fontello.close').click());
+async function preventPopup(page) {
+    await page.setCookie(...[{
+        name: 'popupBanner18',
+        value: "true",
+        domain: '.rouvy.com',
+        url: site
+    }]);
 }
 
 Apify.main(async () => {
@@ -47,8 +53,9 @@ Apify.main(async () => {
 
     log.info(`Opening page ${input.url}...`);
     const page = await browser.newPage();
+    await preventPopup(page);
     await page.goto(input.url);
-    await killPopup(page);
+
     let initial_page_info = await page.evaluate(() => {
         let buttons = $('div.records a.button');
         let page_index = 0;
@@ -63,14 +70,13 @@ Apify.main(async () => {
 
     if(initial_page_info.button) { //we have more pages
         //have to wait for AJAX after a button click
-        await killPopup(page);
         const [response] = await Promise.all([
             page.click(`a[href*="page=${initial_page_info.button}"]`),
             page.waitForResponse(response => {
-                return response.request().url().startsWith('https://my.rouvy.com');
+                return response.request().url().startsWith(site);
             })
         ]);
-        await killPopup(page);
+
     }
 
     details = await page.evaluate(async (record_time) => {
