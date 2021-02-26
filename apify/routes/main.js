@@ -93,7 +93,7 @@ Apify.main(async () => {
         let twoK = $('div.overInfoVT[dataVT="video in 2K"]').length > 0 ? 1:0;
         let HD = $('div.overInfoVT[dataVT="Video in High Quality"]').length > 0 ? 1:0;
 
-        let average_time = $($($('div.tabcont.records tbody tr').first()).children()[8]).text();
+        let average_time = $($($('div.tabcont.records tbody tr').last()).children()[8]).text();
         return {
             "name": name,
             "author": author,
