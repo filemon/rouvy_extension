@@ -48,7 +48,7 @@ Apify.main(async () => {
         log.info('estimates not set');
         get_new_estimates = true;
     }
-    
+
     if(details && input.use_cache && !get_new_estimates) {
         log.info('Route already scraped and use_cache is true, bailing out');
         await Apify.setValue("OUTPUT", details);
