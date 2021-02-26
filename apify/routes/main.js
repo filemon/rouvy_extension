@@ -42,7 +42,14 @@ Apify.main(async () => {
     let rouvy_store = await Apify.openKeyValueStore('rouvy');
     let routes = await rouvy_store.getValue('routes');
     let details = routes[input.url];
-    if(details && input.use_cache) {
+    let get_new_estimates = input.get_new_estimate; //force getting estimates
+
+    if(details && !!!details.estimated_time) { // also get estimates by default where missing
+        log.info('estimates not set');
+        get_new_estimates = true;
+    }
+    
+    if(details && input.use_cache && !get_new_estimates) {
         log.info('Route already scraped and use_cache is true, bailing out');
         await Apify.setValue("OUTPUT", details);
         await Apify.pushData(details);

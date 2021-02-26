@@ -10,11 +10,18 @@
       "editor": "textfield"
     },
     "use_cache": {
-      "title": "Whether to use already scraped results",
+      "title": "Use cache",
       "type": "boolean",
       "description": "Whether to use already scraped results",
       "editor": "checkbox"
     }},
+    "get_new_estimate": {
+      "title": "Get new estimate",
+      "type": "boolean",
+      "description": "Try to get new estimate",
+      "editor": "checkbox"
+    }}
 
-  "required": ["url","use_cache"]
+
+"required": ["url","use_cache"]
 }
