@@ -8,6 +8,7 @@ const Apify = require('apify');
 const {utils: {log}} = Apify;
 
 const site = 'https://my.rouvy.com';
+const url = 'https://my.rouvy.com/public-rankings/seasonresults';
 
 async function preventPopup(page) {
     await page.setCookie(...[{
@@ -71,7 +72,7 @@ async function scrapeStatsPage(currentStats,page) {
 }
 
 Apify.main(async () => {
-    const {url,number_of_stats_pages} = await Apify.getInput();
+    const {number_of_stats_pages} = await Apify.getInput();
 
     const browser = await Apify.launchPuppeteer();
     const page = await browser.newPage();
