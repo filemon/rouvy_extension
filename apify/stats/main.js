@@ -20,8 +20,8 @@ async function preventPopup(page) {
 }
 
 async function scrapeStats(page, number_of_pages) {
-    let stats = {};
-    stats =  await scrapeStatsPage(stats,page);
+
+    await scrapeStatsPage(page);
     // scrape all pages for given category
     for (let i = 2; i < number_of_pages + 1; i++) {
         log.info('Scraping page' + i);
@@ -31,23 +31,11 @@ async function scrapeStats(page, number_of_pages) {
                 return response.request().url().startsWith(site);
             })
         ]);
-        stats = await scrapeStatsPage(stats,page);
+        await scrapeStatsPage(page);
     }
-    return stats;
 }
 
-//add array of jsons to result
-function addToResults(result,additions) {
-    additions.forEach((element) => {
-        result[Object.keys(element)[0]] = element[Object.keys(element)[0]];
-//        result[Object.keys(element)[0]].distance = milesToKm(result[Object.keys(element)[0]].distance);
-    });
-    return result;
-}
-
-
-
-async function scrapeStatsPage(currentStats,page) {
+async function scrapeStatsPage(page) {
     let stats = await page.evaluate(() => {
         let users = $('#snippet--seasonResults tr').map(function () {
             let user = $(this).find('a').text();
@@ -68,7 +56,11 @@ async function scrapeStatsPage(currentStats,page) {
         });
         return users.get();
     });
-    return addToResults(currentStats,stats);
+    let promises = [];
+    stats.forEach(element => {
+        promises.push(Apify.pushData(element));
+    });
+    await Promise.all(promises);
 }
 
 Apify.main(async () => {
@@ -120,9 +112,7 @@ Apify.main(async () => {
 
     await preventPopup(page);
     await page.goto(url);
-    let stats = await scrapeStats(page,Number.parseInt(number_of_stats_pages));
-    await Apify.pushData(stats);
-    console.log(stats);
+    await scrapeStats(page,Number.parseInt(number_of_stats_pages));
     log.info('Crawl finished.');
 
 });
