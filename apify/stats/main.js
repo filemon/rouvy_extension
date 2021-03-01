@@ -19,9 +19,9 @@ async function preventPopup(page) {
     }]);
 }
 
-async function scrapeStats(page, number_of_pages) {
+async function scrapeStats(page, number_of_pages,dataset) {
 
-    await scrapeStatsPage(page);
+    await scrapeStatsPage(page,dataset);
     // scrape all pages for given category
     for (let i = 2; i < number_of_pages + 1; i++) {
         log.info('Scraping page' + i);
@@ -31,11 +31,11 @@ async function scrapeStats(page, number_of_pages) {
                 return response.request().url().startsWith(site);
             })
         ]);
-        await scrapeStatsPage(page);
+        await scrapeStatsPage(page,dataset);
     }
 }
 
-async function scrapeStatsPage(page) {
+async function scrapeStatsPage(page,dataset) {
     let stats = await page.evaluate(() => {
         let users = $('#snippet--seasonResults tr').map(function () {
             let user = $(this).find('a').text();
@@ -58,9 +58,10 @@ async function scrapeStatsPage(page) {
     });
     let promises = [];
     stats.forEach(element => {
-        promises.push(Apify.pushData(element));
+        promises.push(dataset.pushData(element));
     });
     await Promise.all(promises);
+    console.log('Scraping done');
 }
 
 function diffDistance(newDistance, previousDistance) {
@@ -83,34 +84,35 @@ function rouvyTimeToHours(hoursString) {
 }
 
 function diffTimes(newTime, previousTime) {
-    return Number.parseInt(newTime) - Number.parseInt(previousTime);
+    let prevTimeTrans = previousTime.includes(':') ? rouvyTimeToHours(previousTime):previousTime;
+    return Number.parseFloat(newTime) - Number.parseFloat(prevTimeTrans);
 }
 
 function calculateIF(tss,time) {
     if(tss === 0) { //no excercise done
         return 0;
     } else {
-        return Math.sqrt(tss / (100 * time));
+        return Math.sqrt(tss / (100 * time)).toFixed(4);
     }
 }
 
 function copyStats(from,to) {
     to.tss = from.tss;
     to.distance = from.distance.split(/\s/)[0];
-    to.hours = rouvyTimeToHours(from.hours);
+    to.hours = from.hours;
     to.intensity = calculateIF(to.tss,to.hours);
     to.date = new Date();
     return to;
 }
 
 function calculateDiffStats(existingStats, newStats) {
-    let tss_inc = Number.parseFloat(newStats.tss) - Number.parseFloat(existingStats.tss);
+    let tss_inc = Number.parseFloat(newStats.tss).toFixed(1) - Number.parseFloat(existingStats.tss).toFixed(1);
     let time_inc = diffTimes(newStats.hours, existingStats.hours);
     let intensity = calculateIF(tss_inc,time_inc);
     return {
-        tss_inc: tss_inc,
-        distance_inc: diffDistance(newStats.distance, existingStats.distance),
-        hours_inc: time_inc,
+        tss_inc: tss_inc.toFixed(1),
+        distance_inc: diffDistance(newStats.distance, existingStats.distance).toFixed(2),
+        hours_inc: time_inc.toFixed(2),
         tss: newStats.tss,
         distance: newStats.distance,
         hours: newStats.hours,
@@ -134,15 +136,16 @@ function calculateStatsForPeriod(existingStats,newStats, period, days) {
 }
 
 
-async function updateStats() {
+async function updateStats(scraped_stats) {
     let rouvy_store = await Apify.openKeyValueStore('rouvy');
     let existing_stats = await rouvy_store.getValue('user_stats');
-    const scraped_stats = await Apify.openDataset();
-
+    const info = await scraped_stats.getInfo();
+    console.log('Items: ' + JSON.stringify(info));
     await scraped_stats.forEach(async (item, index) => {
         let user = Object.keys(item);
         let existing_user = existing_stats[user];
         item[user].distance = item[user].distance.split(/\s/)[0]; //get rid of UOMs
+        item[user].hours = rouvyTimeToHours(item[user].hours); //get rid of rouvy hour string
         if(existing_user) {
             console.log('Updating ' + user);
             let daily = calculateDiffStats(existing_user,item[user],0);
@@ -154,6 +157,7 @@ async function updateStats() {
                 existing_user[period] = stats;
             });
         } else {
+            console.log('creating new user ' + user);
             existing_stats[user] = item[user];
         }
     });
@@ -167,6 +171,7 @@ Apify.main(async () => {
 
     const browser = await Apify.launchPuppeteer();
     const page = await browser.newPage();
+    const scraped_stats = await Apify.openDataset();
 
     const sessionPool = await Apify.openSessionPool({
         maxPoolSize: 1,
@@ -211,8 +216,8 @@ Apify.main(async () => {
 
     await preventPopup(page);
     await page.goto(url);
-    await scrapeStats(page,Number.parseInt(number_of_stats_pages));
-    await updateStats();
+    await scrapeStats(page,Number.parseInt(number_of_stats_pages),scraped_stats);
+    await updateStats(scraped_stats);
     log.info('Crawl finished.');
 
 });
