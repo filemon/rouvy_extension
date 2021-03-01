@@ -37,7 +37,7 @@ async function scrapeStats(page, number_of_pages,dataset) {
 
 async function scrapeStatsPage(page,dataset) {
     let stats = await page.evaluate(() => {
-        let users = $('#snippet--seasonResults tr').map(function () {
+        let users = $('#snippet--seasonResults tr').slice(0,10).map(function () {
             let user = $(this).find('a').text();
             let gender = $(this).children('td.gender').text();
             let age = $(this).children('td.age').text();
