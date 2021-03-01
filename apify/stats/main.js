@@ -63,6 +63,105 @@ async function scrapeStatsPage(page) {
     await Promise.all(promises);
 }
 
+function diffDistance(newDistance, previousDistance) {
+    return parseFloat(newDistance) - parseFloat(previousDistance);
+}
+
+function minutesToHours(n) {
+    let num = n;
+    let hours = (num / 60).toFixed(2);
+    return hours;
+}
+
+function rouvyTimeToMinutes(hoursString) {
+    let parsed = hoursString.split(':');
+    return Number.parseInt(parsed[0])*60 + Number.parseInt(parsed[1]);
+}
+
+function rouvyTimeToHours(hoursString) {
+    return minutesToHours(rouvyTimeToMinutes(hoursString));
+}
+
+function diffTimes(newTime, previousTime) {
+    return Number.parseInt(newTime) - Number.parseInt(previousTime);
+}
+
+function calculateIF(tss,time) {
+    if(tss === 0) { //no excercise done
+        return 0;
+    } else {
+        return Math.sqrt(tss / (100 * time));
+    }
+}
+
+function copyStats(from,to) {
+    to.tss = from.tss;
+    to.distance = from.distance.split(/\s/)[0];
+    to.hours = rouvyTimeToHours(from.hours);
+    to.intensity = calculateIF(to.tss,to.hours);
+    to.date = new Date();
+    return to;
+}
+
+function calculateDiffStats(existingStats, newStats) {
+    let tss_inc = Number.parseFloat(newStats.tss) - Number.parseFloat(existingStats.tss);
+    let time_inc = diffTimes(newStats.hours, existingStats.hours);
+    let intensity = calculateIF(tss_inc,time_inc);
+    return {
+        tss_inc: tss_inc,
+        distance_inc: diffDistance(newStats.distance, existingStats.distance),
+        hours_inc: time_inc,
+        tss: newStats.tss,
+        distance: newStats.distance,
+        hours: newStats.hours,
+        intensity: intensity,
+        date: new Date()
+    };
+}
+
+function calculateStatsForPeriod(existingStats,newStats, period, days) {
+    let ret = existingStats[period];
+    if(!ret) {
+        ret = calculateDiffStats(newStats,newStats); // init with empty values
+    } else {
+        const diffTime = Math.abs(new Date() - new Date(ret.date));
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        if(diffDays >= days) {
+            ret = calculateDiffStats(ret,newStats);
+        }
+    }
+    return ret;
+}
+
+
+async function updateStats() {
+    let rouvy_store = await Apify.openKeyValueStore('rouvy');
+    let existing_stats = await rouvy_store.getValue('user_stats');
+    const scraped_stats = await Apify.openDataset();
+
+    await scraped_stats.forEach(async (item, index) => {
+        let user = Object.keys(item);
+        let existing_user = existing_stats[user];
+        item[user].distance = item[user].distance.split(/\s/)[0]; //get rid of UOMs
+        if(existing_user) {
+            console.log('Updating ' + user);
+            let daily = calculateDiffStats(existing_user,item[user],0);
+            copyStats(item[user],existing_user); //copy new values to root
+            existing_user.daily = daily;
+            ['weekly','monthly'].forEach( (period) => {
+                let days = period === 'weekly' ? 7:30;
+                let stats = calculateStatsForPeriod(existing_user, item[user], period, days);
+                existing_user[period] = stats;
+            });
+        } else {
+            existing_stats[user] = item[user];
+        }
+    });
+    await rouvy_store.setValue('user_stats', existing_stats);
+}
+
+
+
 Apify.main(async () => {
     const {number_of_stats_pages} = await Apify.getInput();
 
@@ -113,6 +212,7 @@ Apify.main(async () => {
     await preventPopup(page);
     await page.goto(url);
     await scrapeStats(page,Number.parseInt(number_of_stats_pages));
+    await updateStats();
     log.info('Crawl finished.');
 
 });
