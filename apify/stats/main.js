@@ -45,9 +45,11 @@ async function scrapeStatsPage(page,dataset) {
             let tss = $(this).children('td.points').text();
             let distance = $(this).children('td.distance').text();
             let hours = $(this).children('td.duration').text();
+            let country = $(this).find('img.flagIco').attr('datavt');
             return { [user]: {
                         gender: gender,
                         age: age,
+                        country: country,
                         level: level,
                         tss: tss,
                         distance: distance,
@@ -102,6 +104,7 @@ function copyStats(from,to) {
     to.hours = from.hours;
     to.intensity = calculateIF(to.tss,to.hours);
     to.date = new Date();
+    to.country = from.country;
     return to;
 }
 
