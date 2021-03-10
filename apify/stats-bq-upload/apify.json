@@ -1,0 +1,7 @@
+{
+	"name": "stats-bq-upload",
+	"version": "0.0",
+	"buildTag": "latest",
+	"env": null,
+	"template": "example_hello_world"
+}

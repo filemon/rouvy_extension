@@ -1,0 +1,43 @@
+{
+  "fields": [
+    {
+      "mode": "REQUIRED",
+      "name": "name",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "gender",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "age",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "level",
+      "type": "STRING"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "tss",
+      "type": "FLOAT"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "distance",
+      "type": "FLOAT"
+    },
+    {
+      "mode": "REQUIRED",
+      "name": "hours",
+      "type": "FLOAT"
+    },
+    {
+      "name": "time",
+      "type": "TIMESTAMP"
+    }
+  ]
+}
