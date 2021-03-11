@@ -4,7 +4,8 @@
 	"description": "This is a boilerplate of an Apify actor.",
 	"dependencies": {
 		"apify": "^1.0.1",
-		"puppeteer": "*"
+		"puppeteer": "*",
+		"@google-cloud/bigquery": "^5.5.0"
 	},
 	"devDependencies": {
 		"@apify/eslint-config": "^0.1.3",

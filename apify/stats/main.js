@@ -6,6 +6,9 @@
 
 const Apify = require('apify');
 const {utils: {log}} = Apify;
+const {BigQuery} = require('@google-cloud/bigquery');
+const fs = require('fs');
+
 
 const site = 'https://my.rouvy.com';
 const url = 'https://my.rouvy.com/public-rankings/seasonresults';
@@ -167,7 +170,58 @@ async function updateStats(scraped_stats) {
     await rouvy_store.setValue('user_stats', existing_stats);
 }
 
+function transformUser(user,date) {
+    let user_name = Object.keys(user)[0];
+    let ret = user[user_name];
+    ret.time = date;
+    ret.name = user_name;
+    ret.tss = Number.parseFloat(ret.tss);
+    ret.distance = Number.parseFloat(ret.distance.split(/\s/)[0]); //get rid of UOMs
+    ret.hours = Number.parseFloat(rouvyTimeToHours(ret.hours)); //get rid of rouvy hour string
+    ret.gender = ret.gender.trim();
+    ret.age = ret.age.trim();
+    ret.intensity = calculateIF(ret.tss,ret.hours);
+    return ret;
+}
 
+
+
+async function setupCredentialFile() {
+    const credentials = process.env.CREDENTIALS;
+    const { project_id: projectId } = JSON.parse(credentials);
+    console.log('Project ID:', projectId);
+
+    const keyFilename = './credentials.json';
+    try {
+        await fs.writeFileSync(keyFilename, credentials);
+    } catch (err) {
+        throw new Error('Error while saving credentials:' + err);
+    }
+    return new BigQuery({ projectId, keyFilename });
+
+}
+
+async function sendToBigQuery(dataset) {
+    const bigquery = await setupCredentialFile();
+    let date = new Date();
+    console.log(dataset.id);
+    console.log(date);
+    let rows = await dataset.reduce((result, element,index) => {
+        let already_inserted = !! result.find(user => user.name === Object.keys(element)[0]);
+        if(!already_inserted) {
+            result.push(transformUser(element, date));
+        }
+        return result;
+    },[]);
+    if (rows.length > 0) {
+        console.log(`Inserting ${rows.length}`);
+        // Load data from a local file into the table
+        const [job] = await bigquery
+            .dataset('rouvy')
+            .table('daily_stats')
+            .insert(rows);
+    }
+}
 
 Apify.main(async () => {
     const {number_of_stats_pages} = await Apify.getInput();
@@ -218,8 +272,9 @@ Apify.main(async () => {
     console.log(`Opening page ${url}...`);
 
     await preventPopup(page);
-    await page.goto(url);
-    await scrapeStats(page,Number.parseInt(number_of_stats_pages),scraped_stats);
+   await page.goto(url);
+   await scrapeStats(page,Number.parseInt(number_of_stats_pages),scraped_stats);
+    await sendToBigQuery(scraped_stats);
     await updateStats(scraped_stats);
     log.info('Crawl finished.');
 
