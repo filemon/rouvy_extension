@@ -24,6 +24,14 @@ function rouvyTimeToHours(hoursString) {
     return minutesToHours(rouvyTimeToMinutes(hoursString));
 }
 
+function calculateIF(tss,time) {
+    if(tss === 0) { //no excercise done
+        return 0;
+    } else {
+        return Math.sqrt(tss / (100 * time)).toFixed(4);
+    }
+}
+
 function transformUser(user,date) {
     let user_name = Object.keys(user)[0];
     let ret = user[user_name];
@@ -34,6 +42,7 @@ function transformUser(user,date) {
     ret.hours = Number.parseFloat(rouvyTimeToHours(ret.hours)); //get rid of rouvy hour string
     ret.gender = ret.gender.trim();
     ret.age = ret.age.trim();
+    ret.intensity = calculateIF(ret.tss,ret.hours);
     return ret;
 }
 
@@ -57,33 +66,24 @@ Apify.main(async () => {
         let run = runs.data.items[i];
         let dataset = await Apify.openDataset(run.defaultDatasetId);
         let date = new Date(run.startedAt);
-        let startDate = new Date(2021, 1, 27,23);
-        if (date.getTime() > startDate.getTime()) {
-            console.log(dataset.id);
-            console.log(date);
-            let filemon_inserted = false;
-            let rows = await dataset.reduce((result, element,index) => {
-                if(Object.keys(element)[0] === 'filemon' && filemon_inserted) {
-                    console.log('Skipping filemon');
-                } else {
-                    if(Object.keys(element)[0] === 'filemon') {
-                        filemon_inserted = true;
-                    }
-                    result.push(transformUser(element, date));
-                }
-
-                return result;
-            },[]);
-            if (rows.length > 0) {
-                console.log(`Inserting ${rows.length}`);
-                // Load data from a local file into the table
-                const [job] = await bigquery
-                    .dataset('rouvy')
-                    .table('daily_stats')
-                    .insert(rows);
+        console.log(run.id);
+        console.log(dataset.id);
+        console.log(date);
+        let rows = await dataset.reduce((result, element,index) => {
+            let already_inserted = !! result.find(user => user.name === Object.keys(element)[0]);
+            if(!already_inserted) {
+                result.push(transformUser(element, date));
             }
+            return result;
+        },[]);
+        if (rows.length > 0) {
+            console.log(`Inserting ${rows.length}`);
+            // Load data from a local file into the table
+            const [job] = await bigquery
+                .dataset('rouvy')
+                .table('test_stats')
+                .insert(rows);
         }
-        ;
     }
 
 });
