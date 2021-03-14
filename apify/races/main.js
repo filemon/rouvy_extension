@@ -133,7 +133,7 @@ Apify.main(async () => {
         }
 
         details['estimated_time'] = route_details.estimated_time;
-        details['ascended'] = feetsToM(details['ascended']);
+        details['ascended'] = route_details.ascended;
         races['races'][link]['details'] = details;
     }
 
