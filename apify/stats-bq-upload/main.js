@@ -81,7 +81,7 @@ Apify.main(async () => {
             // Load data from a local file into the table
             const [job] = await bigquery
                 .dataset('rouvy')
-                .table('test_stats')
+                .table('daily_stats')
                 .insert(rows);
         }
     }

@@ -272,8 +272,8 @@ Apify.main(async () => {
     console.log(`Opening page ${url}...`);
 
     await preventPopup(page);
-   await page.goto(url);
-   await scrapeStats(page,Number.parseInt(number_of_stats_pages),scraped_stats);
+    await page.goto(url);
+    await scrapeStats(page,Number.parseInt(number_of_stats_pages),scraped_stats);
     await sendToBigQuery(scraped_stats);
     await updateStats(scraped_stats);
     log.info('Crawl finished.');
