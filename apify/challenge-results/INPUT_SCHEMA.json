@@ -17,7 +17,7 @@
         },
         "number_of_stats_pages": {
             "title": "Number of stat pages to scrape",
-            "type": "string",
+            "type": "integer",
             "description": "Stat pages",
             "editor": "textfield"
         }},
