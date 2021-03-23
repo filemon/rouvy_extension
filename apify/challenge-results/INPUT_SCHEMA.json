@@ -1,17 +1,25 @@
 {
-  "title": "PuppeteerCrawler Template",
-  "description": "lorem ipsum",
-  "type": "object",
-  "schemaVersion": 1,
-  "properties": {
-    "startUrls": {
-      "title": "Start URLs",
-      "type": "array",
-      "description": "URLs to start with.",
-      "editor": "requestListSources"
-    }
-  },
-  "required": [
-    "startUrls"
-  ]
+    "title": "Input schema for the career actor.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "rouvy_user": {
+            "title": "Rouvy email",
+            "type": "string",
+            "description": "Rouvy user/email",
+            "editor": "textfield"
+        },
+        "rouvy_pass": {
+            "title": "Rouvy pass",
+            "type": "string",
+            "description": "Rouvy password",
+            "editor": "textfield"
+        },
+        "number_of_stats_pages": {
+            "title": "Number of stat pages to scrape",
+            "type": "string",
+            "description": "Stat pages",
+            "editor": "textfield"
+        }},
+    "required": []
 }
