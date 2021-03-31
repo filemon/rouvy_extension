@@ -21,20 +21,23 @@ async function preventPopup(page) {
     }]);
 }
 
-async function scrapeStats(page, number_of_pages,dataset) {
-//    await page.evaluate(()=>document.querySelector('div.tabcont.results').click());
-//    await page.click('div.tabcont.results');
+async function scrapeStats(page, dataset) {
     await scrapeStatsPage(page,dataset);
     // scrape paginated challenge results
-    for (let i = 2; i < number_of_pages + 1; i++) {
-        log.info('Scraping page' + i);
+    let is_next = await page.evaluate(()=>$('a.ajax.bold.next').length > 0);
+    console.log('is_next:' + is_next);
+    let i = 0;
+    while(is_next) {
+        log.info('Scraping page' + i++);
         await Promise.all([
-            page.evaluate(()=>document.querySelector('a.ajax.bold.next').click()),
+            page.evaluate(()=>$('a.ajax.bold.next').click()),
+            new Promise(function(resolve) {setTimeout(resolve, 2000)}), //avoid throttling
             page.waitForResponse(response => {
                 return response.request().url().startsWith(site);
             })
         ]);
         await scrapeStatsPage(page,dataset);
+        is_next = await page.evaluate(()=>$('a.ajax.bold.next').length > 0);
     }
 }
 
@@ -52,6 +55,7 @@ async function scrapeStatsPage(page,dataset) {
         return users.get();
     });
     let promises = [];
+    console.log('Scraped users: ' + stats.length);
     stats.forEach(element => {
         promises.push(dataset.pushData(element));
     });
@@ -129,7 +133,6 @@ Apify.main(async () => {
     const browser = await Apify.launchPuppeteer();
     const page = await browser.newPage();
     // Store the results to the default dataset.
-    const {number_of_stats_pages} = await Apify.getInput();
     const scraped_stats = await Apify.openDataset();
 
     const sessionPool = await Apify.openSessionPool({
@@ -170,6 +173,6 @@ Apify.main(async () => {
     await session1.setPuppeteerCookies(page_cookies,site);
     await sessionPool.persistState();
     await new Promise(function(resolve) {setTimeout(resolve, 5000)});
-    await scrapeStats(page,number_of_stats_pages,scraped_stats);
+    await scrapeStats(page,scraped_stats);
     await sendToBigQuery(scraped_stats);
 });

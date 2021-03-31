@@ -15,10 +15,5 @@
             "description": "Rouvy password",
             "editor": "textfield"
         },
-        "number_of_stats_pages": {
-            "title": "Number of stat pages to scrape",
-            "type": "integer",
-            "description": "Stat pages"
-        }},
     "required": []
 }
