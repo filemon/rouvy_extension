@@ -12,10 +12,30 @@ function getRoutes() {
 }
 
 
+function add_remove_all_button(parent) {
+    if($('div.btn-danger.favouriteButton.removeAll').length === 0) {
+        let div = document.createElement('div');
+        div.className = 'btn btn-danger favouriteButton removeAll';
+        div.onclick = async function () {
+            $('div.btn.remove').each(function() {
+                $(this).click();
+            });
+        };
+
+        let span = document.createElement('span');
+        span.className = 'icon icon-heart-outline';
+        const text = document.createTextNode("Remove all on this page");
+        span.appendChild(text);
+        div.appendChild(span);
+        parent[0].insertBefore(div,parent[0].firstChild);
+    }
+}
+
+
 function add_remove_button(parent,route_link) {
     if(parent.children('div.btn-danger.favouriteButton').length === 0) {
         let div = document.createElement('div');
-        div.className = 'btn btn-danger favouriteButton';
+        div.className = 'btn btn-danger favouriteButton remove';
         div.onclick = async function () {
             await remove_route(parent, route_link);
         };
@@ -62,6 +82,7 @@ function find_route_link(parent) {
 }
 
 function enrich_favourites() {
+    add_remove_all_button($('div.categorySearch'));
     $('div.box.route').each(function() {
         let route_link = find_route_link($(this));
         add_remove_button($(this),route_link);

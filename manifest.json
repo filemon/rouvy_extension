@@ -1,6 +1,6 @@
 {
   "name": "Rouvy beautifier",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Make Rouvy web great again!",
   "manifest_version": 2,
   "background": {
