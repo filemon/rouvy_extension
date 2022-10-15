@@ -23,7 +23,7 @@ async function preventPopup(page) {
 }
 
 async function scrapeStats(page, number_of_pages,dataset) {
-
+    //await page.setDefaultNavigationTimeout(60000);
     await scrapeStatsPage(page,dataset);
     // scrape all pages for given category
     for (let i = 2; i < number_of_pages + 1; i++) {
@@ -32,7 +32,7 @@ async function scrapeStats(page, number_of_pages,dataset) {
             page.click(`a.ajax.button[href*="seasonResultsPaginator-page=${i}"]`),
             page.waitForResponse(response => {
                 return response.request().url().startsWith(site);
-            })
+            }, {timeout: 0})
         ]);
         await scrapeStatsPage(page,dataset);
     }
@@ -188,6 +188,7 @@ function transformUser(user,date) {
 
 async function setupCredentialFile() {
     const credentials = process.env.CREDENTIALS;
+    console.log('credentials:' + credentials);
     const { project_id: projectId } = JSON.parse(credentials);
     console.log('Project ID:', projectId);
 

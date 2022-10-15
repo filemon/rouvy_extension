@@ -3,7 +3,8 @@
 	"version": "0.0.1",
 	"description": "This is an example of an Apify actor.",
 	"dependencies": {
-		"apify": "^0.22.2"
+		"apify": "^2.3.2",
+		"puppeteer": "^13.0.0"
 	},
 	"devDependencies": {},
 	"scripts": {

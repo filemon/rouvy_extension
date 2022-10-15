@@ -18,7 +18,7 @@ function feetsToM(feets) {
 }
 
 async function getRaceDetails(url, site) {
-    const browser = await Apify.launchPuppeteer({useApifyProxy:true,stealth:true});
+    const browser = await Apify.launchPuppeteer({stealth:true});
     const page = await browser.newPage()
     console.log(`Scanning race details: ${site}${url}`);
     await page.setDefaultNavigationTimeout(0);
@@ -60,7 +60,7 @@ Apify.main(async () => {
 
     console.log('Launching Puppeteer...');
 
-    const browser = await Apify.launchPuppeteer({useApifyProxy:true});
+    const browser = await Apify.launchPuppeteer();
     const page = await browser.newPage();
     //   await page.setDefaultNavigationTimeout(0);
     await page.goto(`${site}/onlinerace`);
