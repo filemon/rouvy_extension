@@ -40,10 +40,11 @@ async function scrapeCategory(page, category) {
     for (let i = 2; i < lastPage + 1; i++) {
         log.info(i);
         await Promise.all([
-            page.click(`div.oncont div.paginator a.ajax.button[href="/virtual-routes?categoryPaginator-page=${i}"]`),
+            page.click(`a.ajax.button[href="/virtual-routes?categoryPaginator-page=${i}"]`),
             page.waitForResponse(response => {
                 return response.request().url().startsWith(site);
-            })
+            }),
+            page.waitForSelector(`a.ajax.button[href="/virtual-routes?categoryPaginator-page=${i-1}"]`)
         ]);
         await scrapeCategoryPage(page);
     }
@@ -69,6 +70,7 @@ async function scrapeCategoryPage(page) {
                 try {
                     await Apify.call('filemon/rouvy-routes', routes_input);
                 } catch (error) {
+                    log.error(error);
                     log.info("Routes scraper call failed, never mind");
                 }
                 ;
